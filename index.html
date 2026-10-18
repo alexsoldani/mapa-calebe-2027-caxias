@@ -183,7 +183,7 @@ a{color:var(--accent-2)}
 .poi-pop__tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
 .poi-tag{font-size:9px;padding:3px 7px;border-radius:999px;background:rgba(78,168,255,.12);border:1px solid rgba(78,168,255,.24);color:#bcdcff}
 /* ---------- opportunity pins ---------- */
-.op-pin{position:relative;width:44px;height:44px;opacity:1!important;border:0;background:transparent;padding:0;display:grid;place-items:center;cursor:pointer;color:#1a1205;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.op-pin{position:absolute;top:0;left:0;width:44px;height:44px;opacity:1!important;border:0;background:transparent;padding:0;display:grid;place-items:center;cursor:pointer;color:#1a1205;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .op-pin__num{
   position:relative;z-index:2;width:32px;height:32px;border-radius:50%;
   background:linear-gradient(160deg,#ffe08a,#ffc233);border:2px solid #0a1220;
@@ -1233,6 +1233,36 @@ a{color:var(--accent-2)}
     if (!DATA.bairros || !DATA.pois) { throw new Error('dados territoriais ausentes'); }
     if (!map.getSource('mc-bairros')) { map.addSource('mc-bairros', { type: 'geojson', data: DATA.bairros }); }
     if (!map.getSource('mc-pois')) { map.addSource('mc-pois', { type: 'geojson', data: poiFC() }); }
+    if (!map.getSource('mc-bairro-label-points')) {
+      var labelFeatures = [];
+      (DATA.bairros.features || []).forEach(function (feature) {
+        var geometry = feature.geometry;
+        var ring = geometry && geometry.type === 'Polygon' ? geometry.coordinates[0] : null;
+        if (!ring || !ring.length) { return; }
+        var sumLon = 0;
+        var sumLat = 0;
+        var count = 0;
+        ring.forEach(function (position) {
+          if (Array.isArray(position) && typeof position[0] === 'number') {
+            sumLon += position[0];
+            sumLat += position[1];
+            count += 1;
+          }
+        });
+        if (!count) { return; }
+        var props = feature.properties || {};
+        var hasAnchor = typeof props.label_lon === 'number' && typeof props.label_lat === 'number';
+        labelFeatures.push({
+          type: 'Feature',
+          properties: { nome: props.nome, tipo: props.tipo },
+          geometry: { type: 'Point', coordinates: hasAnchor ? [props.label_lon, props.label_lat] : [sumLon / count, sumLat / count] }
+        });
+      });
+      map.addSource('mc-bairro-label-points', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: labelFeatures }
+      });
+    }
     if (!map.getSource('mc-streets')) {
       map.addSource('mc-streets', { type: 'geojson', data: lineFC(DATA.streets, function (s) { return { nome: s.nome, classe: s.classe }; }) });
     }
@@ -1300,7 +1330,7 @@ a{color:var(--accent-2)}
         type: 'fill-extrusion',
         source: 'openmaptiles',
         'source-layer': 'building',
-        minzoom: 14,
+        minzoom: 12.8,
         paint: {
           'fill-extrusion-color': ['interpolate', ['linear'],
             ['coalesce', ['get', 'render_height'], ['get', 'height'], 8],
@@ -1449,7 +1479,7 @@ a{color:var(--accent-2)}
     map.addLayer({
       id: 'mc-bairro-label',
       type: 'symbol',
-      source: 'mc-bairros',
+      source: 'mc-bairro-label-points',
       minzoom: 10.4,
       layout: {
         'text-field': ['get', 'nome'],
@@ -1757,6 +1787,9 @@ a{color:var(--accent-2)}
   }
 
   /* ---------------- opportunity markers ---------------- */
+  /* Pins 2, 3 and 4 are less than ~90 m apart in the source coordinates; a small
+     pixel offset keeps all three clickable at territory-overview zoom. */
+  var OP_MARKER_OFFSETS = { 2: [-20, -14], 3: [0, 8], 4: [20, -2] };
   function buildOpMarkers(map) {
     state.opMarkers.forEach(function (marker) {
       try { marker.remove(); } catch (err) { /* ignore */ }
@@ -1787,6 +1820,7 @@ a{color:var(--accent-2)}
       var marker = new maplibregl.Marker({
         element: el,
         anchor: 'center',
+        offset: OP_MARKER_OFFSETS[op.num] || [0, 0],
         opacity: 1,
         opacityWhenCovered: 1
       }).setLngLat([op.lon, op.lat]);
