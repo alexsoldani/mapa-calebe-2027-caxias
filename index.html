@@ -1,1 +1,2427 @@
-<!doctype html><html><head><meta charset="utf-8"><title>deploy test</title></head><body><h1>OK</h1></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#07101e">
+<title>Missão Calebe 2027 — Mapa 3D | Duque de Caxias – RJ</title>
+<meta name="description" content="Mapa interativo 3D do território missionário Itatiaia · Vila São Luís · Sarapuí, em Duque de Caxias – RJ. Bairros, pontos de interesse, rios, ruas e 10 oportunidades de missão.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307101e'/%3E%3Cpath d='M16 26s8-6.2 8-12.6A8 8 0 1 0 8 13.4C8 19.8 16 26 16 26Z' fill='none' stroke='%23ffd166' stroke-width='1.8'/%3E%3Ccircle cx='16' cy='13' r='2.6' fill='%234ea8ff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@^5/dist/maplibre-gl.css">
+<style>
+:root{
+  --bg:#07101e;
+  --panel:rgba(10,18,32,.86);
+  --panel-strong:rgba(8,16,29,.95);
+  --line:rgba(148,163,184,.2);
+  --line-strong:rgba(148,163,184,.36);
+  --text:#eaf2ff;
+  --muted:#9fb0c8;
+  --muted-2:#7f92aa;
+  --accent:#ffd166;
+  --accent-2:#4ea8ff;
+  --danger:#ff8a8a;
+  --focus:#ffd166;
+  --radius:18px;
+  --shadow:0 22px 60px rgba(0,0,0,.5);
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;font-family:var(--font);background:var(--bg);color:var(--text);
+  overflow:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  font-size:14px;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:var(--accent-2)}
+[hidden]{display:none!important}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:fixed;top:8px;left:8px;z-index:120;transform:translateY(-220%);background:var(--accent);color:#1a1205;padding:10px 14px;border-radius:10px;font-weight:700;font-size:12px;transition:transform .2s ease;text-decoration:none}
+.skip-link:focus{transform:none}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+#map{position:absolute;inset:0;background:#0a1526;overflow:hidden}
+#map canvas{outline:none}
+.vignette{
+  position:fixed;inset:0;pointer-events:none;z-index:3;
+  background:
+    radial-gradient(120% 95% at 50% 42%, transparent 40%, rgba(4,9,18,.16) 70%, rgba(3,8,16,.6) 100%),
+    linear-gradient(180deg, rgba(4,10,20,.28) 0%, transparent 15%, transparent 80%, rgba(4,10,20,.46) 100%);
+}
+.glass{
+  background:linear-gradient(160deg, rgba(15,26,45,.92), rgba(8,16,29,.86));
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  -webkit-backdrop-filter:blur(16px) saturate(130%);
+  backdrop-filter:blur(16px) saturate(130%);
+}
+/* ---------- left stack: title + controls ---------- */
+#ui-left{position:fixed;top:16px;left:16px;bottom:16px;width:344px;display:flex;flex-direction:column;gap:12px;z-index:24;pointer-events:none}
+#ui-left > *{pointer-events:auto}
+#ui-left > #title-card{flex:0 0 auto}
+#ui-left > #panel{flex:1 1 auto}
+#title-card{
+  position:relative;overflow:hidden;border-radius:var(--radius);padding:14px 16px 13px;
+  background:linear-gradient(140deg, rgba(21,37,62,.94), rgba(8,16,29,.9));
+}
+#title-card::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,#ff7a45,#ffd166 45%,#4ea8ff 78%,#c084fc)}
+.title-card__top{display:flex;gap:12px;align-items:flex-start}
+.mark{
+  width:38px;height:38px;flex:0 0 auto;border-radius:12px;display:grid;place-items:center;color:var(--accent);
+  background:radial-gradient(circle at 30% 22%, rgba(255,209,102,.24), rgba(78,168,255,.12) 70%);
+  border:1px solid rgba(255,209,102,.32);
+  box-shadow:inset 0 0 18px rgba(255,209,102,.08);
+}
+.mark svg{width:21px;height:21px}
+.eyebrow{margin:0 0 4px;font-size:9.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:6px;line-height:1.3}
+.eyebrow .dot{width:6px;height:6px;flex:0 0 auto;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:softBlink 3.2s ease-in-out infinite}
+#app-title{margin:0;font-size:13.5px;line-height:1.42;font-weight:700;letter-spacing:-.005em;color:#f6faff}
+.subtitle{margin:7px 0 0;font-size:11.5px;line-height:1.55;color:var(--muted);max-width:48ch}
+#panel{
+  border-radius:var(--radius);display:flex;flex-direction:column;min-height:0;overflow:hidden;
+}
+.panel__head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(148,163,184,.13);flex:0 0 auto}
+.panel__head h2{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#dfe9f7}
+.panel__body{padding:2px 14px 16px;overflow-y:auto;overscroll-behavior:contain;min-height:0;scrollbar-width:thin;scrollbar-color:rgba(148,163,184,.35) transparent}
+.panel__body::-webkit-scrollbar{width:8px}
+.panel__body::-webkit-scrollbar-thumb{background:rgba(148,163,184,.3);border-radius:99px}
+.panel__body section{padding:12px 0;border-bottom:1px solid rgba(148,163,184,.1)}
+.panel__body section:last-of-type{border-bottom:0;padding-bottom:4px}
+.panel__body h3{margin:0 0 9px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.toggles{display:grid;gap:1px}
+.switch{display:flex;align-items:center;gap:10px;min-height:42px;padding:3px 2px;border-radius:10px;cursor:pointer;position:relative}
+.switch:hover{background:rgba(148,163,184,.07)}
+.switch input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.switch__track{width:38px;height:22px;flex:0 0 auto;border-radius:99px;background:rgba(148,163,184,.22);position:relative;transition:background .2s ease;box-shadow:inset 0 1px 2px rgba(0,0,0,.35)}
+.switch__track::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#cbd5e1;transition:transform .2s ease,background .2s ease}
+.switch input:checked + .switch__track{background:linear-gradient(135deg,#4ea8ff,#38d39f)}
+.switch input:checked + .switch__track::after{transform:translateX(16px);background:#06101d}
+.switch input:focus-visible + .switch__track{outline:2px solid var(--focus);outline-offset:2px}
+.switch input:disabled + .switch__track{opacity:.35}
+.switch__label{font-size:12.5px;color:#dbe6f5;line-height:1.3}
+.switch__label small{display:block;font-size:9.5px;color:var(--muted-2);font-weight:400;margin-top:1px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 10px;border-radius:999px;
+  background:rgba(148,163,184,.09);border:1px solid rgba(148,163,184,.2);color:#c7d5e8;
+  font-size:10.5px;font-weight:600;transition:background .18s ease,border-color .18s ease,opacity .18s ease;
+}
+.chip:hover{background:rgba(148,163,184,.16)}
+.chip[aria-pressed="true"]{background:rgba(78,168,255,.15);border-color:rgba(78,168,255,.5);color:#eaf3ff}
+.chip[aria-pressed="false"]{opacity:.48}
+.chip__dot{width:8px;height:8px;flex:0 0 auto;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c)}
+.chip__count{font-size:9px;font-weight:500;color:var(--muted-2);font-variant-numeric:tabular-nums}
+.mini-btn{min-height:36px;margin-top:8px;padding:0 10px;border-radius:9px;border:1px dashed rgba(148,163,184,.3);background:transparent;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:.03em}
+.mini-btn:hover{color:#eaf2ff;border-color:var(--line-strong);background:rgba(148,163,184,.08)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn{
+  min-height:44px;border-radius:12px;border:1px solid rgba(148,163,184,.24);background:rgba(148,163,184,.08);
+  color:#e8f1ff;font-size:11.5px;font-weight:600;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  transition:background .18s ease,border-color .18s ease,filter .18s ease;text-decoration:none;
+}
+.btn:hover{background:rgba(148,163,184,.16);border-color:var(--line-strong)}
+.btn--primary{background:linear-gradient(135deg,#ffd166,#ffb020);color:#1a1205;border-color:#ffd166;font-weight:800;box-shadow:0 10px 24px rgba(255,177,32,.2)}
+.btn--primary:hover{filter:brightness(1.06);background:linear-gradient(135deg,#ffd166,#ffb020)}
+.btn--ghost{background:transparent}
+.btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.btn:disabled:hover{background:rgba(148,163,184,.08)}
+.btn svg{width:15px;height:15px;flex:0 0 auto}
+.lang-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.lang-switch{display:inline-flex;background:rgba(148,163,184,.1);border:1px solid rgba(148,163,184,.2);border-radius:10px;padding:3px;gap:2px}
+.lang-btn{min-width:44px;min-height:34px;border-radius:8px;border:0;background:transparent;color:var(--muted);font-size:10.5px;font-weight:800;letter-spacing:.08em;transition:background .18s ease,color .18s ease}
+.lang-btn:hover{color:#eaf2ff}
+.lang-btn.is-active{background:rgba(78,168,255,.22);color:#eaf3ff}
+.legend summary{
+  cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;min-height:32px;
+}
+.legend summary::-webkit-details-marker{display:none}
+.legend summary::after{content:"+";font-size:15px;line-height:1;color:var(--muted);font-weight:500}
+.legend[open] summary::after{content:"–"}
+.legend__grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;margin-top:7px}
+.legend__item{display:flex;align-items:center;gap:7px;font-size:10px;color:#c2d2e6;line-height:1.35}
+.legend__dot{width:9px;height:9px;flex:0 0 auto;border-radius:3px;background:var(--c);box-shadow:0 0 7px var(--c)}
+.legend__pin{width:17px;height:17px;flex:0 0 auto;border-radius:50%;background:linear-gradient(160deg,#ffe08a,#ffc233);color:#1a1205;font-size:8.5px;font-weight:800;display:grid;place-items:center;border:1.5px solid #07101e}
+.legend__line{width:18px;height:3px;flex:0 0 auto;border-radius:2px;background:var(--c)}
+.legend__note{grid-column:1/-1;margin:5px 0 0;font-size:9.5px;line-height:1.5;color:var(--muted-2)}
+.panel__hint{margin:10px 0 0;font-size:9.5px;line-height:1.55;color:var(--muted-2)}
+.icon-btn{
+  width:44px;height:44px;flex:0 0 auto;border-radius:12px;border:1px solid rgba(148,163,184,.22);
+  background:rgba(148,163,184,.08);color:#dbe7f6;font-size:20px;line-height:1;display:grid;place-items:center;
+  transition:background .18s ease,border-color .18s ease;
+}
+.icon-btn:hover{background:rgba(148,163,184,.18);border-color:var(--line-strong)}
+#panel-close{display:none}
+/* ---------- mobile FAB ---------- */
+#panel-toggle{
+  display:none;position:fixed;top:10px;right:10px;z-index:30;width:54px;height:54px;border-radius:16px;
+  align-items:center;justify-content:center;color:#eaf2ff;padding:0;
+}
+#panel-toggle svg{width:22px;height:22px}
+#panel-toggle:hover{background:rgba(148,163,184,.14)}
+/* ---------- POI popup ---------- */
+.mc-popup .maplibregl-popup-content{background:transparent;padding:0;border-radius:14px;box-shadow:none}
+.mc-popup .maplibregl-popup-tip{border-top-color:rgba(10,18,32,.97)!important;border-bottom-color:rgba(10,18,32,.97)!important;border-left-color:rgba(10,18,32,.97)!important;border-right-color:rgba(10,18,32,.97)!important}
+.mc-popup .maplibregl-popup-close-button{color:#9fb0c8;font-size:20px;width:30px;height:30px;border-radius:50%;right:2px;top:2px}
+.mc-popup .maplibregl-popup-close-button:hover{background:rgba(148,163,184,.15);color:#fff}
+.poi-pop{
+  background:linear-gradient(160deg,rgba(16,28,48,.98),rgba(8,16,29,.98));
+  border:1px solid rgba(148,163,184,.28);border-radius:14px;padding:12px 14px;min-width:190px;max-width:268px;
+  box-shadow:0 18px 42px rgba(0,0,0,.55);
+}
+.poi-pop__cat{display:flex;align-items:center;gap:6px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.poi-dot{width:8px;height:8px;flex:0 0 auto;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c)}
+.poi-pop h3{margin:6px 0 0;font-size:13.5px;line-height:1.35;color:#f2f7ff;font-weight:700}
+.poi-pop__addr{margin:5px 0 0;font-size:11px;line-height:1.45;color:var(--muted)}
+.poi-pop__tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.poi-tag{font-size:9px;padding:3px 7px;border-radius:999px;background:rgba(78,168,255,.12);border:1px solid rgba(78,168,255,.24);color:#bcdcff}
+/* ---------- opportunity pins ---------- */
+.op-pin{position:relative;width:44px;height:44px;opacity:1!important;border:0;background:transparent;padding:0;display:grid;place-items:center;cursor:pointer;color:#1a1205;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.op-pin__num{
+  position:relative;z-index:2;width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(160deg,#ffe08a,#ffc233);border:2px solid #0a1220;
+  box-shadow:0 6px 16px rgba(0,0,0,.45),0 0 0 3px rgba(255,209,102,.18);
+  display:grid;place-items:center;font:800 13px/1 var(--font);font-variant-numeric:tabular-nums;
+  transition:transform .18s ease;
+}
+.op-pin.is-priority .op-pin__num{width:36px;height:36px;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.5),0 0 0 4px rgba(255,209,102,.24)}
+.op-pin:hover .op-pin__num,.op-pin:focus-visible .op-pin__num{transform:scale(1.12)}
+.op-pin__halo{position:absolute;inset:2px;border-radius:50%;border:2px solid rgba(255,209,102,.9);opacity:0;pointer-events:none;z-index:1}
+.op-pin.is-priority .op-pin__halo{animation:pinPulse 2.7s ease-out infinite}
+/* ---------- bairro panel ---------- */
+.bairro-panel{
+  position:fixed;left:376px;bottom:18px;z-index:26;width:min(318px,calc(100vw - 32px));
+  border-radius:16px;padding:14px 16px 15px;opacity:0;visibility:hidden;transform:translateY(14px);
+  transition:opacity .28s ease,transform .28s ease,visibility .28s;pointer-events:none;
+}
+.bairro-panel.is-open{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+.bairro-panel__head{display:flex;align-items:flex-start;gap:9px}
+.bairro-panel__dot{width:11px;height:11px;flex:0 0 auto;border-radius:50%;margin-top:5px;background:var(--c);box-shadow:0 0 10px var(--c)}
+.bairro-panel h2{margin:0;font-size:15px;line-height:1.3;font-weight:700;letter-spacing:-.01em;flex:1 1 auto}
+.bairro-panel__kind{margin:2px 0 0;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.bairro-panel p.bairro-panel__desc{margin:9px 0 0;font-size:11.5px;line-height:1.6;color:#c8d7e9}
+.bairro-panel .icon-btn{width:36px;height:36px;min-width:36px;font-size:18px;border-radius:10px}
+/* ---------- opportunity drawer ---------- */
+.op-panel{
+  position:fixed;top:16px;right:16px;bottom:16px;width:min(432px,calc(100vw - 32px));z-index:40;
+  border-radius:20px;overflow:hidden;display:flex;flex-direction:column;
+  visibility:hidden;transform:translateX(calc(100% + 40px));pointer-events:none;
+  transition:transform .42s cubic-bezier(.22,.8,.26,1),visibility .42s;
+}
+.op-panel.is-open{visibility:visible;transform:none;pointer-events:auto}
+.op-panel__scroll{overflow-y:auto;overscroll-behavior:contain;padding:20px 22px 26px;scrollbar-width:thin;scrollbar-color:rgba(148,163,184,.35) transparent}
+.op-panel__scroll::-webkit-scrollbar{width:8px}
+.op-panel__scroll::-webkit-scrollbar-thumb{background:rgba(148,163,184,.3);border-radius:99px}
+.op-panel__head{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:flex-start}
+.op-badge{
+  width:46px;height:46px;border-radius:14px;background:linear-gradient(150deg,#ffe08a,#ffb020);color:#201503;
+  font-weight:800;font-size:19px;display:grid;place-items:center;border:1.5px solid rgba(255,255,255,.28);
+  box-shadow:0 10px 24px rgba(245,166,35,.25);font-variant-numeric:tabular-nums;
+}
+.op-kicker{margin:0 0 3px;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.op-panel h2{margin:0;font-size:20px;line-height:1.25;font-weight:700;letter-spacing:-.015em}
+.op-name-alt{margin:4px 0 0;font-size:11.5px;line-height:1.45;color:var(--muted);font-style:italic}
+.op-meta{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 2px}
+.meta-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:rgba(148,163,184,.1);border:1px solid rgba(148,163,184,.2);font-size:10px;color:#c8d7e9;font-weight:600;line-height:1.3}
+.meta-pill--prio{color:#1a1205;background:var(--p);border-color:transparent;font-weight:800}
+.meta-pill__dot{width:7px;height:7px;border-radius:50%;background:var(--c);flex:0 0 auto}
+.op-section{margin-top:19px}
+.op-section h3{margin:0 0 6px;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.op-section p{margin:0;font-size:12.5px;line-height:1.65;color:#d8e4f3}
+.op-list{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.op-list li{position:relative;padding-left:19px;font-size:12px;line-height:1.55;color:#d8e4f3}
+.op-list li::before{content:"";position:absolute;left:2px;top:.5em;width:6px;height:6px;border-radius:2px;background:var(--accent);box-shadow:0 0 8px rgba(255,209,102,.65)}
+.op-quote{border-left:3px solid var(--accent);background:rgba(255,209,102,.07);padding:10px 12px;border-radius:0 10px 10px 0;font-size:12px;line-height:1.65;color:#f3e6c4}
+.op-section--partnership p{font-size:11.5px;color:#c3d4e8}
+.op-panel__foot{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap}
+.op-panel__foot .btn{flex:1 1 150px}
+/* ---------- tour HUD ---------- */
+.tour-hud{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:28;
+  display:flex;gap:12px;align-items:flex-start;max-width:min(580px,calc(100vw - 32px));padding:12px 14px;border-radius:16px;
+}
+.tour-hud__step{font-size:9.5px;font-weight:800;letter-spacing:.1em;color:var(--accent);border:1px solid rgba(255,209,102,.32);border-radius:8px;padding:4px 7px;white-space:nowrap;background:rgba(255,209,102,.07);font-variant-numeric:tabular-nums;margin-top:1px}
+.tour-hud__text{min-width:0}
+.tour-hud__text strong{display:block;font-size:13px;line-height:1.3;font-weight:700}
+.tour-hud__text p{margin:3px 0 0;font-size:10.5px;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tour-hud .icon-btn{width:36px;height:36px;min-width:36px;font-size:18px;border-radius:10px}
+/* ---------- splash / fatal / toast ---------- */
+.splash{
+  position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px;
+  background:radial-gradient(85% 85% at 50% 34%,#0e1e34 0%,#07101e 55%,#040a13 100%);
+  transition:opacity .55s ease,visibility .55s ease;
+}
+.splash.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+.splash__inner{text-align:center;max-width:350px}
+.splash__mark{width:66px;height:66px;margin:0 auto 18px;border-radius:20px;display:grid;place-items:center;color:var(--accent);background:linear-gradient(150deg,rgba(255,209,102,.2),rgba(78,168,255,.1));border:1px solid rgba(255,209,102,.32);animation:float 5s ease-in-out infinite}
+.splash__mark svg{width:34px;height:34px}
+.splash__eyebrow{margin:0 0 7px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.splash h2{margin:0;font-size:25px;letter-spacing:-.025em;font-weight:800}
+.splash__status{margin:15px 0 0;font-size:11.5px;color:var(--muted);min-height:1.5em}
+.loader{width:200px;height:4px;border-radius:99px;background:rgba(148,163,184,.18);margin:16px auto 0;overflow:hidden}
+.loader span{display:block;height:100%;width:42%;border-radius:99px;background:linear-gradient(90deg,#ffd166,#4ea8ff);animation:loadSlide 1.5s cubic-bezier(.45,.05,.55,.95) infinite}
+.fatal{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:20px;background:rgba(3,8,16,.8);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.fatal__card{max-width:440px;width:100%;border-radius:20px;padding:24px}
+.fatal__icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px;font-weight:800;background:rgba(255,107,107,.13);border:1px solid rgba(255,107,107,.4);color:var(--danger);margin-bottom:14px}
+.fatal h2{margin:0 0 8px;font-size:19px;letter-spacing:-.01em}
+.fatal p{margin:0;font-size:12.5px;line-height:1.65;color:var(--muted)}
+.fatal__detail{margin-top:10px;font-size:10px;line-height:1.5;color:var(--muted-2);word-break:break-word}
+.fatal__actions{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.fatal__hint{margin-top:12px!important;font-size:10px!important;color:var(--muted-2)!important}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:55;background:rgba(8,16,29,.96);border:1px solid rgba(148,163,184,.28);color:#eaf2ff;font-size:11.5px;padding:11px 16px;border-radius:12px;box-shadow:var(--shadow);max-width:calc(100vw - 32px);text-align:center}
+/* ---------- maplibre controls ---------- */
+.maplibregl-ctrl-top-right{margin:16px 16px 0 0}
+.maplibregl-ctrl-group{background:rgba(8,16,29,.9)!important;border:1px solid rgba(148,163,184,.22)!important;border-radius:12px!important;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.4)!important}
+.maplibregl-ctrl-group button{background:transparent!important;width:40px!important;height:40px!important}
+.maplibregl-ctrl-group button+button{border-top:1px solid rgba(148,163,184,.16)!important}
+.maplibregl-ctrl-group button:hover{background:rgba(148,163,184,.12)!important}
+.maplibregl-ctrl button .maplibregl-ctrl-icon{filter:invert(1) brightness(1.35);opacity:.85}
+.maplibregl-ctrl-attrib{background:rgba(8,16,29,.82)!important;color:#9fb0c8!important;border-radius:8px 0 0 0;font-size:9.5px!important;padding:2px 6px!important}
+.maplibregl-ctrl-attrib a{color:#bcd0e8!important}
+.maplibregl-ctrl-attrib-button{filter:invert(1) brightness(1.3)}
+.maplibregl-ctrl-scale{background:rgba(8,16,29,.7)!important;border-color:rgba(148,163,184,.4)!important;color:#cfe0f5!important;font-size:9px!important;border-radius:6px;margin-bottom:4px!important}
+.maplibregl-ctrl-bottom-left{margin:0 0 8px 16px}
+.maplibregl-ctrl-bottom-right{margin:0 16px 8px 0}
+.maplibregl-marker{will-change:transform}
+/* ---------- animations ---------- */
+@keyframes pinPulse{0%{transform:scale(.62);opacity:.9}70%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
+@keyframes softBlink{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes loadSlide{0%{transform:translateX(-110%)}100%{transform:translateX(360%)}}
+/* ---------- responsive ---------- */
+@media (max-width:1024px){
+  .bairro-panel{left:16px;bottom:62px}
+}
+@media (max-width:760px){
+  #ui-left{display:contents}
+  #title-card{position:fixed;top:10px;left:10px;right:76px;width:auto;padding:10px 12px;border-radius:14px;z-index:24}
+  .title-card__top{gap:9px}
+  .mark{width:31px;height:31px;border-radius:9px}
+  .mark svg{width:17px;height:17px}
+  .eyebrow{font-size:8px;letter-spacing:.11em;margin-bottom:3px}
+  #app-title{font-size:10.5px;line-height:1.4}
+  .subtitle{font-size:9.5px;line-height:1.45;margin-top:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #panel-toggle{display:flex}
+  #panel{
+    position:fixed;left:0;right:0;bottom:0;top:auto;z-index:45;max-height:78vh;width:auto;
+    border-radius:20px 20px 0 0;border-bottom:0;padding-top:7px;
+    transform:translateY(calc(100% + 30px));visibility:hidden;
+    transition:transform .38s cubic-bezier(.22,.8,.26,1),visibility .38s;
+  }
+  #panel::before{content:"";width:42px;height:4px;flex:0 0 auto;border-radius:99px;background:rgba(148,163,184,.38);margin:0 auto 2px;display:block}
+  #panel.is-open{transform:none;visibility:visible}
+  #panel .panel__head{padding:8px 16px 10px}
+  #panel-close{display:grid}
+  .panel__body{padding:0 16px calc(20px + env(safe-area-inset-bottom))}
+  .panel__hint{padding-bottom:6px}
+  .switch{min-height:46px}
+  .chip{min-height:44px;padding:0 12px;font-size:11.5px}
+  .chip__count{font-size:10px}
+  .mini-btn{min-height:44px;font-size:11px}
+  .lang-btn{min-height:44px}
+  .maplibregl-ctrl-top-right{margin-top:74px;margin-right:12px}
+  .maplibregl-ctrl-bottom-left{margin-left:10px}
+  .maplibregl-ctrl-bottom-right{margin-right:10px}
+  .bairro-panel{left:10px;right:10px;bottom:62px;width:auto;padding:12px 14px}
+  .tour-hud{bottom:62px;padding:10px 12px;gap:9px}
+  .tour-hud__text strong{font-size:12px}
+  .op-panel{
+    top:auto;left:0;right:0;bottom:0;width:100%;max-height:84vh;border-radius:22px 22px 0 0;border-bottom:0;
+    z-index:50;transform:translateY(105%);
+  }
+  .op-panel.is-open{transform:none}
+  .op-panel::before{content:"";display:block;width:42px;height:4px;flex:0 0 auto;border-radius:99px;background:rgba(148,163,184,.4);margin:8px auto 0}
+  .op-panel__scroll{padding:14px 16px calc(22px + env(safe-area-inset-bottom));max-height:calc(84vh - 12px)}
+  .op-panel h2{font-size:18px}
+  .op-section p{font-size:12.5px}
+  .op-list li{font-size:12px}
+  .op-panel__foot{margin-top:18px;padding-bottom:4px}
+  .toast{bottom:88px}
+}
+@media (max-width:390px){
+  #title-card{right:72px;padding:9px 10px}
+  #app-title{font-size:10px}
+  .subtitle{font-size:9px;margin-top:4px}
+  .op-panel h2{font-size:17px}
+}
+@media (max-height:560px) and (min-width:761px){
+  .subtitle{display:none}
+  #panel .panel__body{padding-bottom:8px}
+}
+
+.op-pin.is-active .op-pin__num{background:linear-gradient(160deg,#fff2bd,#ffcf4d);box-shadow:0 0 0 5px rgba(255,209,102,.32),0 8px 22px rgba(0,0,0,.5);transform:scale(1.08)}
+#tour-btn.is-running{background:linear-gradient(135deg,#ff9f6b,#ff7a45);border-color:#ff9f6b;color:#201005}
+.bairro-panel__desc{overflow-wrap:anywhere}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .op-pin.is-priority .op-pin__halo{animation:none;opacity:.45}
+  .eyebrow .dot,.splash__mark{animation:none}
+  .loader span{animation:none;width:100%}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#panel" data-i18n="skip">Pular para os controles do mapa</a>
+<div id="map" role="application" aria-label="Mapa 3D interativo do território — use as setas do teclado para navegar" data-i18n-aria="mapAria"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<div id="ui-left">
+  <header id="title-card" class="glass">
+    <div class="title-card__top">
+      <div class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.4"/><path d="M12 2.2V1M12 23v-1.2"/></svg>
+      </div>
+      <div>
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="eyebrow">Missão Calebe 2027 · Mapa 3D</span></p>
+        <h1 id="app-title" data-i18n="appTitle">Missão Calebe 2027 — Território: Itatiaia · Vila São Luís · Sarapuí / Duque de Caxias – RJ</h1>
+      </div>
+    </div>
+    <p class="subtitle" data-i18n="subtitle">Diagnóstico territorial interativo: vulnerabilidade social, risco de enchente e oportunidades de missão.</p>
+  </header>
+
+  <aside id="panel" class="glass" aria-labelledby="panel-title">
+    <div class="panel__head">
+      <h2 id="panel-title" data-i18n="controls">Controles</h2>
+      <button id="panel-close" class="icon-btn" type="button" aria-label="Fechar controles" data-i18n-aria="closeControls">×</button>
+    </div>
+    <div class="panel__body">
+      <section>
+        <h3 data-i18n="layers">Camadas</h3>
+        <div class="toggles">
+          <label class="switch">
+            <input type="checkbox" id="t-bairros" data-toggle="bairros" checked>
+            <span class="switch__track" aria-hidden="true"></span>
+            <span class="switch__label" data-i18n="bairros">Bairros</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="t-pois" data-toggle="pois" checked>
+            <span class="switch__track" aria-hidden="true"></span>
+            <span class="switch__label" data-i18n="pois">Pontos de interesse</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="t-oportunidades" data-toggle="oportunidades" checked>
+            <span class="switch__track" aria-hidden="true"></span>
+            <span class="switch__label" data-i18n="oportunidades">Oportunidades</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="t-ruas" data-toggle="ruas" checked>
+            <span class="switch__track" aria-hidden="true"></span>
+            <span class="switch__label" data-i18n="ruas">Ruas principais</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="t-rios" data-toggle="rios" checked>
+            <span class="switch__track" aria-hidden="true"></span>
+            <span class="switch__label" data-i18n="rios">Rios e canais</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="t-buildings" data-toggle="buildings" checked>
+            <span class="switch__track" aria-hidden="true"></span>
+            <span class="switch__label" data-i18n="buildings">Prédios 3D</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="t-terrain" data-toggle="terrain" checked>
+            <span class="switch__track" aria-hidden="true"></span>
+            <span class="switch__label" data-i18n="terrain">Terreno 3D</span>
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h3 data-i18n="categories">Categorias de POIs</h3>
+        <div id="chips" class="chips" role="group" aria-label="Filtrar pontos de interesse por categoria"></div>
+        <button id="cats-all" class="mini-btn" type="button" data-i18n="showAll">Mostrar todas as categorias</button>
+      </section>
+
+      <section>
+        <h3 data-i18n="actions">Ações</h3>
+        <div class="actions">
+          <button id="tour-btn" class="btn btn--primary" type="button" aria-pressed="false" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5 12 3l8 2.5v13L12 21l-8-2.5Z"/><path d="m9.6 9.2 5.4 2.8-5.4 2.8V9.2Z" fill="currentColor" stroke="none"/></svg>
+            <span id="tour-label" data-i18n="tour">Tour pelos bairros</span>
+          </button>
+          <button id="reset-btn" class="btn" type="button" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9M4 4v4h4"/></svg>
+            <span data-i18n="reset">Visão geral</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="lang-row">
+        <h3 style="margin:0" data-i18n="language">Idioma</h3>
+        <div class="lang-switch" role="group" aria-label="Idioma / Language">
+          <button class="lang-btn is-active" type="button" data-lang="pt" aria-pressed="true" aria-label="Português" data-i18n-aria="langPt">PT</button>
+          <button class="lang-btn" type="button" data-lang="en" aria-pressed="false" aria-label="English" data-i18n-aria="langEn">EN</button>
+        </div>
+      </section>
+
+      <section>
+        <details class="legend" open>
+          <summary data-i18n="legend">Legenda</summary>
+          <div id="legend-body"></div>
+        </details>
+      </section>
+      <p class="panel__hint" data-i18n="hint">Dica: clique nos bairros coloridos, nos pontos e nos pinos numerados. Use o tour para percorrer as quatro áreas-foco.</p>
+    </div>
+  </aside>
+</div>
+
+<button id="panel-toggle" class="glass" type="button" aria-expanded="false" aria-controls="panel" aria-label="Abrir controles do mapa" data-i18n-aria="openControls">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+</button>
+
+<div id="tour-hud" class="tour-hud glass" hidden aria-live="polite">
+  <span class="tour-hud__step" id="tour-step">1 / 4</span>
+  <div class="tour-hud__text">
+    <strong id="tour-name">Itatiaia</strong>
+    <p id="tour-desc"></p>
+  </div>
+  <button id="tour-stop" class="icon-btn" type="button" aria-label="Encerrar tour" data-i18n-aria="tourStopAria">×</button>
+</div>
+
+<section id="bairro-panel" class="bairro-panel glass" aria-labelledby="bairro-name" aria-hidden="true" inert>
+  <div class="bairro-panel__head">
+    <span class="bairro-panel__dot" id="bairro-dot" aria-hidden="true"></span>
+    <div style="flex:1 1 auto;min-width:0">
+      <h2 id="bairro-name">—</h2>
+      <p class="bairro-panel__kind" id="bairro-kind"></p>
+    </div>
+    <button id="bairro-close" class="icon-btn" type="button" aria-label="Fechar informações do bairro" data-i18n-aria="closeBairro">×</button>
+  </div>
+  <p class="bairro-panel__desc" id="bairro-desc"></p>
+</section>
+
+<aside id="op-panel" class="op-panel glass" role="dialog" aria-modal="false" aria-labelledby="op-title" aria-hidden="true">
+  <div class="op-panel__scroll">
+    <header class="op-panel__head">
+      <span class="op-badge" id="op-num">1</span>
+      <div style="min-width:0">
+        <p class="op-kicker" id="op-kicker">Oportunidade</p>
+        <h2 id="op-title"></h2>
+        <p class="op-name-alt" id="op-name-alt"></p>
+      </div>
+      <button id="op-close" class="icon-btn" type="button" aria-label="Fechar painel" data-i18n-aria="closePanel">×</button>
+    </header>
+    <div class="op-meta" id="op-meta"></div>
+    <div id="op-body"></div>
+    <footer class="op-panel__foot">
+      <button id="op-center" class="btn btn--primary" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+        <span data-i18n="center">Centralizar no mapa</span>
+      </button>
+      <button id="op-copy" class="btn btn--ghost" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1L10.9 5"/><path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1L13.1 19"/></svg>
+        <span data-i18n="copyLink">Copiar link</span>
+      </button>
+    </footer>
+  </div>
+</aside>
+
+<div id="splash" class="splash" role="status" aria-live="polite">
+  <div class="splash__inner">
+    <div class="splash__mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><path d="M12 6.5v7M9.2 8.6h5.6" stroke-width="1.4"/></svg>
+    </div>
+    <p class="splash__eyebrow">Missão Calebe 2027</p>
+    <h2 data-i18n="splashTitle">Território em 3D</h2>
+    <div class="loader" aria-hidden="true"><span></span></div>
+    <p id="splash-status" class="splash__status">Preparando o mapa…</p>
+  </div>
+</div>
+
+<div id="fatal" class="fatal" hidden role="alertdialog" aria-modal="true" aria-labelledby="fatal-title" aria-describedby="fatal-msg">
+  <div class="fatal__card glass">
+    <div class="fatal__icon" aria-hidden="true">!</div>
+    <h2 id="fatal-title" data-i18n="fatalTitle">Não foi possível carregar o mapa</h2>
+    <p id="fatal-msg"></p>
+    <p class="fatal__detail" id="fatal-detail"></p>
+    <div class="fatal__actions">
+      <button id="retry-btn" class="btn btn--primary" type="button" data-i18n="retry">Tentar novamente</button>
+    </div>
+    <p class="fatal__hint" data-i18n="fatalHint">O mapa usa CDN pública e não exige chave de API. Verifique sua conexão com a internet.</p>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<div id="sr-live" class="sr-only" aria-live="polite"></div>
+<noscript><div style="position:fixed;inset:0;z-index:200;background:#07101e;color:#eaf2ff;display:grid;place-items:center;padding:24px;text-align:center;font-family:system-ui,sans-serif">Este mapa interativo precisa de JavaScript ativado. / This interactive map requires JavaScript.</div></noscript>
+
+<script src="https://unpkg.com/maplibre-gl@^5/dist/maplibre-gl.js"></script>
+<script>(function () {
+  'use strict';
+
+  /* ============================================================
+     Missão Calebe 2027 — Mapa territorial 3D
+     Static site. No build step, no API keys.
+     Data: ../data/*.json (relative to map/index.html)
+     ============================================================ */
+
+  var MAP_STYLE_URL = 'https://tiles.openfreemap.org/styles/liberty';
+  var DEM_URL = 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png';
+  var DEM_ATTRIBUTION = 'Terreno: AWS Terrain Tiles';
+  var STYLE_TIMEOUT_MS = 26000;
+  var MAP_LOAD_TIMEOUT_MS = 32000;
+
+  var OVERVIEW = { center: [-43.2940, -22.7690], zoom: 13.2, pitch: 55, bearing: -22 };
+  var TABLET_OVERVIEW = { center: [-43.2940, -22.7690], zoom: 13.0, pitch: 54, bearing: -22 };
+  var MOBILE_OVERVIEW = { center: [-43.2940, -22.7680], zoom: 12.75, pitch: 52, bearing: -22 };
+
+  var CATS = {
+    educacao:  { pt: 'Educação',  en: 'Education', color: '#5aa9ff' },
+    saude:     { pt: 'Saúde',     en: 'Health',    color: '#ff6b6b' },
+    fe:        { pt: 'Fé',        en: 'Faith',     color: '#c084fc' },
+    lazer:     { pt: 'Lazer',     en: 'Leisure',   color: '#38d39f' },
+    comercio:  { pt: 'Comércio',  en: 'Commerce',  color: '#ffd166' },
+    transporte:{ pt: 'Transporte',en: 'Transport', color: '#9aa7bd' },
+    social:    { pt: 'Social',    en: 'Social',    color: '#f472b6' },
+    seguranca: { pt: 'Segurança', en: 'Safety',    color: '#fb923c' }
+  };
+  var CAT_KEYS = Object.keys(CATS);
+  var PRIORITY_COLORS = { 1: '#ffd166', 2: '#7cc7ff', 3: '#a8b6c9' };
+
+  var BAIRRO_INFO = {
+    'Itatiaia': {
+      pt: 'Bairro denso e comercial, cortado pela Avenida Doutor Manoel Reis, com alta vulnerabilidade social e presença evangélica ainda pequena. Concentra famílias, idosos e trabalhadores informais.',
+      en: 'A dense, commercial neighbourhood crossed by Avenida Doutor Manoel Reis, with high social vulnerability and a still-small evangelical presence. It concentrates families, older adults and informal workers.'
+    },
+    'Vila Sao Luiz': {
+      pt: 'Área residencial de Vila São Luiz com forte presença de crianças e adolescentes, comércio de rua e equipamentos públicos próximos. A juventude e a falta de atividades no contraturno são marcas do bairro.',
+      en: 'A residential area of Vila São Luiz with many children and teenagers, street commerce and nearby public services. Youth and the lack of out-of-school activities are hallmarks of the neighbourhood.'
+    },
+    'Parque Sarapui': {
+      pt: 'Bairro próximo ao Rio Sarapuí, em área sujeita a alagamentos, com população idosa e famílias ribeirinhas. A proteção contra enchentes e o cuidado com idosos são prioridades locais.',
+      en: 'A neighbourhood near the Sarapuí River, in a flood-prone area, with an older population and riverside families. Flood protection and care for older adults are local priorities.'
+    },
+    'Sarapui': {
+      pt: 'Bairro ao norte do território, com a UPA de Sarapuí como referência de saúde e uma juventude numerosa. A presença de igrejas evangélicas organizadas ainda é baixa diante da demanda.',
+      en: 'A neighbourhood in the north of the territory, with UPA Sarapuí as its health reference and a large youth population. Organised evangelical churches are still few for the level of demand.'
+    }
+  };
+  var CONTEXT_BAIRRO_INFO = {
+    pt: 'Bairro de contexto do território. Ajuda a ler os limites, a continuidade urbana e os fluxos em torno das quatro áreas-foco.',
+    en: 'Context neighbourhood of the territory. It helps read the boundaries, urban continuity and flows around the four focus areas.'
+  };
+
+  var UI = {
+    pt: {
+      skip: 'Pular para os controles do mapa',
+      mapAria: 'Mapa 3D interativo do território missionário. Use as setas para navegar e as teclas de mais e menos para o zoom.',
+      eyebrow: 'Missão Calebe 2027 · Mapa missionário 3D',
+      appTitle: 'Missão Calebe 2027 — Território: Itatiaia · Vila São Luís · Sarapuí / Duque de Caxias – RJ',
+      subtitle: 'Diagnóstico territorial interativo: vulnerabilidade social, risco de enchente e oportunidades de missão.',
+      controls: 'Controles', closeControls: 'Fechar controles', openControls: 'Abrir controles do mapa',
+      layers: 'Camadas', bairros: 'Bairros', pois: 'Pontos de interesse', oportunidades: 'Oportunidades',
+      ruas: 'Ruas principais', rios: 'Rios e canais', buildings: 'Prédios 3D', terrain: 'Terreno 3D',
+      categories: 'Categorias de POIs', showAll: 'Mostrar todas as categorias', actions: 'Ações',
+      tour: 'Tour pelos bairros', tourRunning: 'Parar tour', reset: 'Visão geral', language: 'Idioma',
+      legend: 'Legenda', hint: 'Dica: clique nos bairros coloridos, nos pontos e nos pinos numerados. Use o tour para percorrer as quatro áreas-foco.',
+      splashTitle: 'Território em 3D', fatalTitle: 'Não foi possível carregar o mapa', retry: 'Tentar novamente',
+      fatalHint: 'O mapa usa CDNs públicas e não exige chave de API. Verifique sua conexão com a internet.',
+      center: 'Centralizar no mapa', copyLink: 'Copiar link', copied: 'Link direto copiado para a área de transferência.',
+      closePanel: 'Fechar painel', closeBairro: 'Fechar informações do bairro',
+      bairroFocus: 'Bairro-foco', bairroContext: 'Bairro de contexto',
+      opWord: 'Oportunidade', priority: 'Prioridade', bairroLabel: 'Bairro', publico: 'Público-alvo',
+      descricao: 'Descrição', atividades: 'Atividades sugeridas', justificativa: 'Justificativa territorial',
+      impacto: 'Impacto esperado', parcerias: 'Parcerias e logística',
+      loadingData: 'Carregando dados territoriais…', loadingStyle: 'Conectando ao mapa base…', loadingMap: 'Montando o território em 3D…',
+      fatalMsg: 'A conexão com o mapa base falhou. Verifique sua internet e tente novamente.',
+      fatalData: 'Não foi possível carregar os dados territoriais (arquivos JSON).',
+      fatalWebgl: 'Seu navegador não oferece suporte a WebGL 2, necessário para o mapa 3D. Tente o Chrome, Edge, Firefox ou Safari atualizados.',
+      fatalLib: 'A biblioteca MapLibre não carregou. Verifique a conexão com a CDN e recarregue a página.',
+      fatalDetail: 'Detalhe técnico', fatalTimeout: 'O mapa base demorou demais para responder.',
+      openOp: 'Abrir oportunidade', poiFallback: 'Ponto de interesse',
+      legendFocus: 'Bairros-foco', legendOpp: 'Oportunidades', legendCats: 'POIs por categoria', legendLines: 'Camadas lineares',
+      legendRuas: 'Ruas principais', legendRios: 'Rios e canais', legendBuildings: 'Prédios 3D',
+      legendPriorityNote: 'Pinos com pulso marcam as três prioridades mais altas.',
+      tourStopAria: 'Encerrar tour', tourOf: 'de', langPt: 'Português', langEn: 'English',
+      buildingsUnavailable: 'Prédios 3D indisponíveis neste estilo de mapa.',
+      tourStopped: 'Tour encerrado.', noResults: 'Nenhuma categoria selecionada.',
+      title: 'Missão Calebe 2027 — Mapa 3D | Duque de Caxias – RJ'
+    },
+    en: {
+      skip: 'Skip to map controls',
+      mapAria: 'Interactive 3D map of the mission territory. Use the arrow keys to pan and plus or minus to zoom.',
+      eyebrow: 'Caleb Mission 2027 · 3D map',
+      appTitle: 'Caleb Mission 2027 — Territory: Itatiaia · Vila São Luís · Sarapuí / Duque de Caxias – RJ',
+      subtitle: 'Interactive territorial diagnosis: social vulnerability, flood risk and mission opportunities.',
+      controls: 'Controls', closeControls: 'Close controls', openControls: 'Open map controls',
+      layers: 'Layers', bairros: 'Neighbourhoods', pois: 'Points of interest', oportunidades: 'Opportunities',
+      ruas: 'Main roads', rios: 'Rivers and canals', buildings: '3D buildings', terrain: '3D terrain',
+      categories: 'POI categories', showAll: 'Show all categories', actions: 'Actions',
+      tour: 'Neighbourhood tour', tourRunning: 'Stop tour', reset: 'Overview', language: 'Language',
+      legend: 'Legend', hint: 'Tip: click the coloured neighbourhoods, the points and the numbered pins. Use the tour to fly through the four focus areas.',
+      splashTitle: 'Territory in 3D', fatalTitle: 'The map could not load', retry: 'Try again',
+      fatalHint: 'The map uses public CDNs and needs no API key. Please check your internet connection.',
+      center: 'Center on map', copyLink: 'Copy link', copied: 'Direct link copied to the clipboard.',
+      closePanel: 'Close panel', closeBairro: 'Close neighbourhood information',
+      bairroFocus: 'Focus neighbourhood', bairroContext: 'Context neighbourhood',
+      opWord: 'Opportunity', priority: 'Priority', bairroLabel: 'Neighbourhood', publico: 'Target audience',
+      descricao: 'Description', atividades: 'Suggested activities', justificativa: 'Territorial rationale',
+      impacto: 'Expected impact', parcerias: 'Partnerships and logistics',
+      loadingData: 'Loading territorial data…', loadingStyle: 'Connecting to the basemap…', loadingMap: 'Building the territory in 3D…',
+      fatalMsg: 'The connection to the basemap failed. Please check your internet connection and try again.',
+      fatalData: 'The territorial data (JSON files) could not be loaded.',
+      fatalWebgl: 'Your browser does not support WebGL 2, which is required for the 3D map. Please try an up-to-date Chrome, Edge, Firefox or Safari.',
+      fatalLib: 'The MapLibre library failed to load. Check the CDN connection and reload the page.',
+      fatalDetail: 'Technical detail', fatalTimeout: 'The basemap took too long to respond.',
+      openOp: 'Open opportunity', poiFallback: 'Point of interest',
+      legendFocus: 'Focus neighbourhoods', legendOpp: 'Opportunities', legendCats: 'POIs by category', legendLines: 'Line layers',
+      legendRuas: 'Main roads', legendRios: 'Rivers and canals', legendBuildings: '3D buildings',
+      legendPriorityNote: 'Pulsing pins mark the three highest priorities.',
+      tourStopAria: 'Stop tour', tourOf: 'of', langPt: 'Português', langEn: 'English',
+      buildingsUnavailable: '3D buildings are unavailable in this map style.',
+      tourStopped: 'Tour stopped.', noResults: 'No category selected.',
+      title: 'Caleb Mission 2027 — 3D Map | Duque de Caxias, Brazil'
+    }
+  };
+
+  var DATA = {
+    loaded: false,
+    bairros: null,
+    pois: null,
+    streets: null,
+    water: null,
+    opportunities: null,
+    poiById: null
+  };
+
+  var state = {
+    lang: 'pt',
+    map: null,
+    mapReady: false,
+    styleLoaded: false,
+    hasBuildingSource: false,
+    activeOp: null,
+    activeBairro: null,
+    layers: { bairros: true, pois: true, oportunidades: true, ruas: true, rios: true, buildings: true, terrain: true },
+    cats: {},
+    tour: { running: false, token: 0, index: -1 },
+    reduced: false,
+    opMarkers: [],
+    popup: null,
+    splashKey: 'loadingData',
+    fatalKind: null,
+    fatalMessage: '',
+    booting: false,
+    mapErrors: [],
+    panelOpen: false
+  };
+  CAT_KEYS.forEach(function (key) { state.cats[key] = true; });
+
+  /* ---------------- tiny DOM helpers ---------------- */
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+  function esc(value) {
+    return String(value === null || value === undefined ? '' : value).replace(/[&<>"']/g, function (ch) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+    });
+  }
+  function t(key) {
+    var dict = UI[state.lang] || UI.pt;
+    return dict[key] || UI.pt[key] || key;
+  }
+  function catLabel(key) { return (CATS[key] && CATS[key][state.lang]) || key; }
+  function opName(op) { return state.lang === 'en' ? op.nome_en : op.nome_pt; }
+  function opAltName(op) { return state.lang === 'en' ? op.nome_pt : op.nome_en; }
+  function isNarrow() { return window.matchMedia('(max-width: 760px)').matches; }
+  function getOverview() {
+    var w = window.innerWidth;
+    if (w <= 760) { return MOBILE_OVERVIEW; }
+    if (w <= 1100) { return TABLET_OVERVIEW; }
+    return OVERVIEW;
+  }
+  function refreshReducedMotion() {
+    try { state.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+    catch (err) { state.reduced = false; }
+  }
+  function announce(message) {
+    var live = $('#sr-live');
+    if (!live) { return; }
+    live.textContent = '';
+    window.setTimeout(function () { live.textContent = message; }, 60);
+  }
+  var toastTimer = null;
+  function showToast(message) {
+    var el = $('#toast');
+    if (!el) { return; }
+    el.textContent = message;
+    el.hidden = false;
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(function () { el.hidden = true; }, 3200);
+  }
+
+  /* ---------------- splash / fatal ---------------- */
+  function setSplashStatus(key) {
+    state.splashKey = key;
+    var el = $('#splash-status');
+    if (el) { el.textContent = t(key); }
+  }
+  function showSplash() {
+    var el = $('#splash');
+    if (!el) { return; }
+    el.classList.remove('is-hidden');
+    el.setAttribute('aria-hidden', 'false');
+  }
+  function hideSplash() {
+    var el = $('#splash');
+    if (el) {
+      el.classList.add('is-hidden');
+      el.setAttribute('aria-hidden', 'true');
+    }
+  }
+  function fatalMessageFor(kind, err) {
+    if (kind === 'data') { return t('fatalData'); }
+    if (kind === 'webgl') { return t('fatalWebgl'); }
+    if (kind === 'lib') { return t('fatalLib'); }
+    if (err && /tempo|timeout|timed out/i.test(String(err.message || ''))) { return t('fatalTimeout'); }
+    return t('fatalMsg');
+  }
+  function showFatal(kind, err) {
+    state.fatalKind = kind;
+    state.fatalMessage = err && err.message ? String(err.message) : '';
+    var box = $('#fatal');
+    var msg = $('#fatal-msg');
+    var detail = $('#fatal-detail');
+    if (msg) { msg.textContent = fatalMessageFor(kind, err); }
+    if (detail) {
+      detail.textContent = state.fatalMessage ? t('fatalDetail') + ': ' + state.fatalMessage : '';
+      detail.hidden = !state.fatalMessage;
+    }
+    if (box) {
+      box.hidden = false;
+      var retry = $('#retry-btn');
+      if (retry) { retry.focus({ preventScroll: true }); }
+    }
+    hideSplash();
+  }
+  function hideFatal() {
+    var box = $('#fatal');
+    if (box) { box.hidden = true; }
+    state.fatalKind = null;
+    state.fatalMessage = '';
+  }
+  function refreshFatalLanguage() {
+    if (!state.fatalKind) { return; }
+    var msg = $('#fatal-msg');
+    if (msg) { msg.textContent = fatalMessageFor(state.fatalKind, { message: state.fatalMessage }); }
+    var detail = $('#fatal-detail');
+    if (detail) {
+      detail.textContent = state.fatalMessage ? t('fatalDetail') + ': ' + state.fatalMessage : '';
+    }
+  }
+
+  /* ---------------- data loading ---------------- */
+  function fetchJSON(path) {
+    return fetch(path, { cache: 'no-cache' }).then(function (res) {
+      if (!res.ok) { throw new Error(path + ' → HTTP ' + res.status); }
+      return res.json().then(function (json) {
+        return { path: path, json: json };
+      });
+    });
+  }
+  function validateData(bundle) {
+    var bairros = bundle.bairros;
+    if (!bairros || !Array.isArray(bairros.features) || !bairros.features.length) {
+      throw new Error('bairros.geojson: FeatureCollection vazia ou inválida');
+    }
+    if (!Array.isArray(bundle.pois) || !bundle.pois.length) { throw new Error('pois.json inválido'); }
+    if (!Array.isArray(bundle.streets) || !bundle.streets.length) { throw new Error('streets.json inválido'); }
+    if (!Array.isArray(bundle.water) || !bundle.water.length) { throw new Error('water.json inválido'); }
+    if (!Array.isArray(bundle.opportunities) || !bundle.opportunities.length) { throw new Error('oportunidades.json inválido'); }
+    bundle.opportunities.forEach(function (op) {
+      if (typeof op.num !== 'number' || typeof op.lat !== 'number' || typeof op.lon !== 'number') {
+        throw new Error('Oportunidade sem num/lat/lon: ' + JSON.stringify(op.id || op.nome_pt));
+      }
+    });
+  }
+  function loadAllData() {
+    return Promise.all([
+      fetchJSON('data/bairros.geojson'),
+      fetchJSON('data/pois.json'),
+      fetchJSON('data/streets.json'),
+      fetchJSON('data/water.json'),
+      fetchJSON('data/oportunidades.json')
+    ]).then(function (results) {
+      var bundle = {
+        bairros: results[0].json,
+        pois: results[1].json,
+        streets: results[2].json,
+        water: results[3].json,
+        opportunities: results[4].json
+      };
+      validateData(bundle);
+      DATA.bairros = bundle.bairros;
+      DATA.pois = bundle.pois;
+      DATA.streets = bundle.streets;
+      DATA.water = bundle.water;
+      DATA.opportunities = bundle.opportunities.slice().sort(function (a, b) { return a.num - b.num; });
+      DATA.poiById = {};
+      DATA.pois.forEach(function (p) { DATA.poiById[p.id] = p; });
+      DATA.loaded = true;
+    });
+  }
+  function preflightStyle() {
+    var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = controller ? window.setTimeout(function () { controller.abort(); }, STYLE_TIMEOUT_MS) : null;
+    return fetch(MAP_STYLE_URL, controller ? { signal: controller.signal, cache: 'force-cache' } : { cache: 'force-cache' })
+      .then(function (res) {
+        if (!res.ok) { throw new Error('basemap style → HTTP ' + res.status); }
+        return res.json();
+      })
+      .then(function (json) {
+        if (!json || !Array.isArray(json.layers)) { throw new Error('basemap style inválido'); }
+      })
+      .finally(function () { if (timer) { window.clearTimeout(timer); } });
+  }
+  function hasWebGL2() {
+    try {
+      var canvas = document.createElement('canvas');
+      return !!(window.WebGL2RenderingContext && canvas.getContext('webgl2'));
+    } catch (err) { return false; }
+  }
+
+  /* ---------------- boot ---------------- */
+  function boot() {
+    if (state.booting) { return; }
+    state.booting = true;
+    hideFatal();
+    showSplash();
+    setSplashStatus('loadingData');
+    if (state.map) {
+      try { state.map.remove(); } catch (err) { /* ignore */ }
+      state.map = null;
+    }
+    state.mapReady = false;
+    state.styleLoaded = false;
+    state.hasBuildingSource = false;
+    state.opMarkers = [];
+    state.popup = null;
+    closeOpPanel({ silent: true });
+    closeBairroPanel();
+    stopTour({ silent: true });
+
+    if (typeof maplibregl === 'undefined') {
+      state.booting = false;
+      showFatal('lib', new Error('maplibregl is undefined'));
+      return;
+    }
+    if (!hasWebGL2()) {
+      state.booting = false;
+      showFatal('webgl');
+      return;
+    }
+    var dataPromise = DATA.loaded ? Promise.resolve() : loadAllData();
+    dataPromise.then(function () {
+      buildChips();
+      buildLegend();
+      applyLanguage(state.lang);
+      setSplashStatus('loadingStyle');
+      return preflightStyle();
+    }).then(function () {
+      setSplashStatus('loadingMap');
+      return createMap();
+    }).then(function () {
+      state.booting = false;
+      setSplashStatus('loadingMap');
+      window.setTimeout(hideSplash, 3800);
+      var tourBtn = $('#tour-btn');
+      var resetBtn = $('#reset-btn');
+      if (tourBtn) { tourBtn.disabled = false; }
+      if (resetBtn) { resetBtn.disabled = false; }
+      window.__MC_READY__ = true;
+      var deep = readHashOp();
+      if (deep) { openOpportunity(deep, { fly: true, initial: true }); }
+    }).catch(function (err) {
+      state.booting = false;
+      var kind = DATA.loaded ? 'style' : 'data';
+      if (err && err.message && /data\/|bairros|pois\.json|streets|water|oportunidades/i.test(err.message)) { kind = 'data'; }
+      /* eslint-disable no-console */
+      if (window.console && console.warn) { console.warn('[map] boot failed:', err && err.message ? err.message : err); }
+      showFatal(kind, err);
+    });
+  }
+
+  /* ---------------- map creation ---------------- */
+  function createMap() {
+    return new Promise(function (resolve, reject) {
+      var view = getOverview();
+      var map;
+      try {
+        map = new maplibregl.Map({
+          container: 'map',
+          style: MAP_STYLE_URL,
+          center: view.center,
+          zoom: view.zoom,
+          pitch: view.pitch,
+          bearing: view.bearing,
+          maxPitch: 70,
+          minZoom: 9,
+          maxZoom: 18,
+          antialias: true,
+          attributionControl: false,
+          pixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+          fadeDuration: 150,
+          hash: false,
+          dragRotate: true,
+          touchZoomRotate: true
+        });
+      } catch (err) {
+        reject(err);
+        return;
+      }
+      state.map = map;
+      window.__mc = {
+        map: map,
+        state: state,
+        data: DATA,
+        openOpportunity: function (num) { openOpportunity(num, { fly: true }); },
+        closeOpportunity: function () { closeOpPanel(); },
+        tour: function () { startTour(); },
+        setLanguage: function (lang) { applyLanguage(lang); }
+      };
+      var settled = false;
+      var watchdog = window.setTimeout(function () {
+        if (settled) { return; }
+        settled = true;
+        try { map.remove(); } catch (err) { /* ignore */ }
+        reject(new Error('Tempo esgotado ao carregar o mapa base (timeout).'));
+      }, MAP_LOAD_TIMEOUT_MS);
+
+      map.addControl(new maplibregl.NavigationControl({ visualizePitch: true, showZoom: true, showCompass: true }), 'top-right');
+      map.addControl(new maplibregl.ScaleControl({ maxWidth: 96, unit: 'metric' }), 'bottom-left');
+      map.addControl(new maplibregl.AttributionControl({
+        compact: true,
+        customAttribution: '© OpenFreeMap · © OpenStreetMap contributors · ' + DEM_ATTRIBUTION
+      }), 'bottom-right');
+      map.on('styleimagemissing', function (event) {
+        var id = event && event.id;
+        if (!id || map.hasImage(id)) { return; }
+        map.addImage(id, { width: 1, height: 1, data: new Uint8Array(4) }, { pixelRatio: 1 });
+      });
+      function collapseAttribution() {
+        var attrib = document.querySelector('.maplibregl-ctrl-attrib.maplibregl-compact');
+        if (attrib) {
+          attrib.removeAttribute('open');
+          attrib.classList.remove('maplibregl-compact-show');
+        }
+      }
+
+      map.on('error', function (event) {
+        var msg = event && event.error && event.error.message ? event.error.message : String(event && event.error ? event.error : 'unknown map error');
+        state.mapErrors.push(msg);
+        if (!state.styleLoaded && /style/i.test(msg) && !settled) {
+          settled = true;
+          window.clearTimeout(watchdog);
+          try { map.remove(); } catch (err) { /* ignore */ }
+          reject(new Error('basemap style error: ' + msg));
+        }
+      });
+      map.on('style.load', function () { state.styleLoaded = true; });
+      map.once('idle', function () {
+        window.__MC_IDLE__ = true;
+        hideSplash();
+        collapseAttribution();
+      });
+      map.once('load', function () {
+        if (settled) { return; }
+        window.clearTimeout(watchdog);
+        try {
+          setupSky(map);
+          setupTerrain(map);
+          addMapLayers(map);
+          attachMapEvents(map);
+          buildOpMarkers(map);
+          applyLanguage(state.lang);
+          applyLayerToggles();
+          applyPoiFilter();
+          state.mapReady = true;
+          settled = true;
+          window.__MC_IDLE__ = false;
+          collapseAttribution();
+          resolve();
+        } catch (err) {
+          settled = true;
+          reject(err);
+        }
+      });
+    });
+  }
+
+  function setupSky(map) {
+    try {
+      map.setSky({
+        'sky-color': '#0a1a2b',
+        'sky-horizon-blend': 0.5,
+        'horizon-color': '#1d4260',
+        'horizon-fog-blend': 0.75,
+        'fog-color': '#0a1726',
+        'fog-ground-blend': 0.9,
+        'atmosphere-blend': 0.6
+      });
+    } catch (err) { /* sky is decorative: never block the map */ }
+  }
+
+  function setupTerrain(map) {
+    if (!map.getSource('terrain-dem')) {
+      map.addSource('terrain-dem', {
+        type: 'raster-dem',
+        tiles: [DEM_URL],
+        encoding: 'terrarium',
+        tileSize: 256,
+        maxzoom: 15,
+        attribution: DEM_ATTRIBUTION
+      });
+    }
+    if (state.layers.terrain) {
+      map.setTerrain({ source: 'terrain-dem', exaggeration: 1.12 });
+    } else {
+      map.setTerrain(null);
+    }
+  }
+
+  /* ---------------- inline POI icons (no external sprite) ---------------- */
+  var ICON_DRAW = {
+    educacao: function (g) {
+      g.lineWidth = 3;
+      g.beginPath(); g.moveTo(0, -7); g.lineTo(0, 9); g.stroke();
+      g.beginPath();
+      g.moveTo(0, -8); g.quadraticCurveTo(-8, -12, -15, -7); g.lineTo(-15, 7);
+      g.quadraticCurveTo(-7, 3, 0, 8); g.closePath(); g.fill();
+      g.beginPath();
+      g.moveTo(0, -8); g.quadraticCurveTo(8, -12, 15, -7); g.lineTo(15, 7);
+      g.quadraticCurveTo(7, 3, 0, 8); g.closePath(); g.fill();
+    },
+    saude: function (g) {
+      g.fillRect(-4.5, -13, 9, 26);
+      g.fillRect(-13, -4.5, 26, 9);
+    },
+    fe: function (g) {
+      g.beginPath(); g.moveTo(-15, 2); g.lineTo(0, -13); g.lineTo(15, 2); g.closePath(); g.fill();
+      g.fillRect(-9, 2, 18, 13);
+      g.fillRect(-1.8, -23, 3.6, 10);
+      g.fillRect(-5.2, -19.4, 10.4, 3.2);
+    },
+    lazer: function (g) {
+      g.beginPath(); g.arc(-3, -3, 10.5, 0, Math.PI * 2); g.fill();
+      g.fillRect(-6, 8, 5, 12);
+    },
+    comercio: function (g) {
+      g.lineWidth = 3.6;
+      g.beginPath(); g.arc(0, -3, 8, Math.PI, 0); g.stroke();
+      g.beginPath();
+      g.moveTo(-13, -3); g.lineTo(13, -3); g.lineTo(11, 14); g.lineTo(-11, 14); g.closePath(); g.fill();
+    },
+    transporte: function (g) {
+      g.fillRect(-13, -12, 26, 18);
+      g.globalCompositeOperation = 'destination-out';
+      g.fillRect(-9, -8, 7, 5);
+      g.fillRect(2, -8, 7, 5);
+      g.globalCompositeOperation = 'source-over';
+      g.beginPath(); g.arc(-7, 9.5, 3.6, 0, Math.PI * 2); g.fill();
+      g.beginPath(); g.arc(7, 9.5, 3.6, 0, Math.PI * 2); g.fill();
+    },
+    social: function (g) {
+      g.beginPath(); g.arc(-7, -8, 6, 0, Math.PI * 2); g.fill();
+      g.fillRect(-14, -1, 14, 13);
+      g.beginPath(); g.arc(7, -3, 5, 0, Math.PI * 2); g.fill();
+      g.fillRect(2, 4, 11, 10);
+    },
+    seguranca: function (g) {
+      g.beginPath();
+      g.moveTo(0, -16); g.lineTo(14, -10); g.lineTo(14, 0);
+      g.quadraticCurveTo(14, 12, 0, 18); g.quadraticCurveTo(-14, 12, -14, 0);
+      g.lineTo(-14, -10); g.closePath(); g.fill();
+      g.globalCompositeOperation = 'destination-out';
+      g.lineWidth = 4;
+      g.beginPath(); g.moveTo(-6, 1); g.lineTo(-1, 6); g.lineTo(7, -4); g.stroke();
+      g.globalCompositeOperation = 'source-over';
+    }
+  };
+  function registerPoiIcons(map) {
+    Object.keys(ICON_DRAW).forEach(function (cat) {
+      var canvas = document.createElement('canvas');
+      canvas.width = 64;
+      canvas.height = 64;
+      var g = canvas.getContext('2d');
+      g.translate(32, 32);
+      g.fillStyle = '#ffffff';
+      g.strokeStyle = '#ffffff';
+      g.lineCap = 'round';
+      g.lineJoin = 'round';
+      try { ICON_DRAW[cat](g); } catch (err) { /* keep a plain dot if drawing fails */ }
+      var imageData = g.getImageData(0, 0, 64, 64);
+      if (!map.hasImage('poi-' + cat)) {
+        map.addImage('poi-' + cat, imageData, { pixelRatio: 2 });
+      }
+    });
+  }
+
+  /* ---------------- expression helpers ---------------- */
+  function catColorExpression(fallback) {
+    var parts = [];
+    CAT_KEYS.forEach(function (key) { parts.push(key, CATS[key].color); });
+    return ['match', ['get', 'cat']].concat(parts, [fallback || '#94a3b8']);
+  }
+  function streetWidthExpression(scale) {
+    return ['interpolate', ['linear'], ['zoom'],
+      10,
+      ['match', ['get', 'classe'],
+        'motorway', 2.2 * scale, 'trunk', 2.0 * scale, 'primary', 1.7 * scale,
+        'secondary', 1.35 * scale, 1.0 * scale],
+      16,
+      ['match', ['get', 'classe'],
+        'motorway', 7.0 * scale, 'trunk', 6.2 * scale, 'primary', 5.2 * scale,
+        'secondary', 4.2 * scale, 3.2 * scale]
+    ];
+  }
+  function lineFC(list, propsFn) {
+    var features = [];
+    (list || []).forEach(function (item) {
+      if (!item || !Array.isArray(item.coords) || item.coords.length < 2) { return; }
+      features.push({
+        type: 'Feature',
+        properties: propsFn(item),
+        geometry: { type: 'LineString', coordinates: item.coords }
+      });
+    });
+    return { type: 'FeatureCollection', features: features };
+  }
+  function poiFC() {
+    var features = (DATA.pois || []).map(function (point) {
+      return {
+        type: 'Feature',
+        properties: { id: point.id, nome: point.nome || '', cat: point.cat, sub: point.sub || '' },
+        geometry: { type: 'Point', coordinates: [point.lon, point.lat] }
+      };
+    });
+    return { type: 'FeatureCollection', features: features };
+  }
+  function pickFontStack(map, bold) {
+    var wanted = bold ? 'Noto Sans Bold' : 'Noto Sans Regular';
+    var layers = (map.getStyle() && map.getStyle().layers) || [];
+    for (var i = 0; i < layers.length; i += 1) {
+      var layout = layers[i].layout;
+      if (layers[i].type === 'symbol' && layout && Array.isArray(layout['text-font'])) {
+        if (layout['text-font'].indexOf(wanted) !== -1) { return [wanted]; }
+        return layout['text-font'];
+      }
+    }
+    return [wanted];
+  }
+  function addLayerMaybeBefore(map, layer, beforeId) {
+    if (beforeId) { map.addLayer(layer, beforeId); }
+    else { map.addLayer(layer); }
+  }
+
+  /* ---------------- map layers ---------------- */
+  var LAYER_GROUPS = {
+    bairros: ['mc-bairro-fill', 'mc-bairro-extrude', 'mc-bairro-extrude-context', 'mc-bairro-glow', 'mc-bairro-line', 'mc-bairro-label'],
+    pois: ['mc-poi-circle', 'mc-poi-icon'],
+    ruas: ['mc-street-casing', 'mc-street-line'],
+    rios: ['mc-water-glow', 'mc-water-line', 'mc-water-label'],
+    buildings: ['mc-buildings-3d']
+  };
+
+  function addMapLayers(map) {
+    if (!DATA.bairros || !DATA.pois) { throw new Error('dados territoriais ausentes'); }
+    if (!map.getSource('mc-bairros')) { map.addSource('mc-bairros', { type: 'geojson', data: DATA.bairros }); }
+    if (!map.getSource('mc-pois')) { map.addSource('mc-pois', { type: 'geojson', data: poiFC() }); }
+    if (!map.getSource('mc-streets')) {
+      map.addSource('mc-streets', { type: 'geojson', data: lineFC(DATA.streets, function (s) { return { nome: s.nome, classe: s.classe }; }) });
+    }
+    if (!map.getSource('mc-water')) {
+      map.addSource('mc-water', { type: 'geojson', data: lineFC(DATA.water, function (w) { return { nome: w.nome, tipo: w.tipo }; }) });
+    }
+
+    var styleLayers = (map.getStyle() && map.getStyle().layers) || [];
+    var firstSymbol = null;
+    for (var i = 0; i < styleLayers.length; i += 1) {
+      if (styleLayers[i].type === 'symbol') { firstSymbol = styleLayers[i].id; break; }
+    }
+    var hasBuilding = !!(map.getSource('openmaptiles') && styleLayers.some(function (layer) {
+      return layer.source === 'openmaptiles' && layer['source-layer'] === 'building';
+    }));
+    state.hasBuildingSource = hasBuilding;
+    if (hasBuilding) {
+      var hasBuiltIn3d = styleLayers.some(function (layer) { return layer.id === 'building-3d'; });
+      if (hasBuiltIn3d) {
+        try { map.setLayoutProperty('building-3d', 'visibility', 'none'); } catch (err) { /* older style */ }
+      }
+    }
+
+    /* --- bairro area: flat tint + translucent ground-level slab --- */
+    addLayerMaybeBefore(map, {
+      id: 'mc-bairro-fill',
+      type: 'fill',
+      source: 'mc-bairros',
+      paint: {
+        'fill-color': ['get', 'cor'],
+        'fill-opacity': ['case', ['==', ['get', 'tipo'], 'foco'], 0.13, 0.045]
+      }
+    }, firstSymbol);
+    addLayerMaybeBefore(map, {
+      id: 'mc-bairro-extrude',
+      type: 'fill-extrusion',
+      source: 'mc-bairros',
+      filter: ['==', ['get', 'tipo'], 'foco'],
+      paint: {
+        'fill-extrusion-color': ['get', 'cor'],
+        'fill-extrusion-height': 7,
+        'fill-extrusion-base': 0,
+        'fill-extrusion-opacity': 0.42,
+        'fill-extrusion-vertical-gradient': true
+      }
+    }, firstSymbol);
+    addLayerMaybeBefore(map, {
+      id: 'mc-bairro-extrude-context',
+      type: 'fill-extrusion',
+      source: 'mc-bairros',
+      filter: ['==', ['get', 'tipo'], 'contexto'],
+      paint: {
+        'fill-extrusion-color': ['get', 'cor'],
+        'fill-extrusion-height': 7,
+        'fill-extrusion-base': 0,
+        'fill-extrusion-opacity': 0.1,
+        'fill-extrusion-vertical-gradient': true
+      }
+    }, firstSymbol);
+
+    /* --- 3D buildings from the basemap vector source, when available --- */
+    if (hasBuilding) {
+      addLayerMaybeBefore(map, {
+        id: 'mc-buildings-3d',
+        type: 'fill-extrusion',
+        source: 'openmaptiles',
+        'source-layer': 'building',
+        minzoom: 14,
+        paint: {
+          'fill-extrusion-color': ['interpolate', ['linear'],
+            ['coalesce', ['get', 'render_height'], ['get', 'height'], 8],
+            0, '#24344e', 12, '#2f4568', 40, '#3b5a85', 100, '#4a6f9e'],
+          'fill-extrusion-height': ['max', 4,
+            ['coalesce', ['get', 'render_height'], ['get', 'height'], ['*', ['coalesce', ['get', 'levels'], 2], 3], 8]
+          ],
+          'fill-extrusion-base': ['coalesce', ['get', 'render_min_height'], 0],
+          'fill-extrusion-opacity': 0.9,
+          'fill-extrusion-vertical-gradient': true
+        }
+      }, firstSymbol);
+    } else {
+      var buildingToggle = $('#t-buildings');
+      if (buildingToggle) {
+        buildingToggle.checked = false;
+        buildingToggle.disabled = true;
+        buildingToggle.setAttribute('title', t('buildingsUnavailable'));
+        state.layers.buildings = false;
+      }
+    }
+
+    /* --- focus neighbourhood glow + outline --- */
+    addLayerMaybeBefore(map, {
+      id: 'mc-bairro-glow',
+      type: 'line',
+      source: 'mc-bairros',
+      filter: ['==', ['get', 'tipo'], 'foco'],
+      paint: {
+        'line-color': ['get', 'cor'],
+        'line-width': ['interpolate', ['linear'], ['zoom'], 11, 7, 16, 16],
+        'line-opacity': 0.16,
+        'line-blur': 7
+      }
+    }, firstSymbol);
+    addLayerMaybeBefore(map, {
+      id: 'mc-bairro-line',
+      type: 'line',
+      source: 'mc-bairros',
+      paint: {
+        'line-color': ['get', 'cor'],
+        'line-width': ['interpolate', ['linear'], ['zoom'],
+          11, ['case', ['==', ['get', 'tipo'], 'foco'], 1.6, 1.0],
+          16, ['case', ['==', ['get', 'tipo'], 'foco'], 3.4, 1.3]],
+        'line-opacity': ['case', ['==', ['get', 'tipo'], 'foco'], 0.95, 0.4]
+      }
+    }, firstSymbol);
+
+    /* --- streets --- */
+    addLayerMaybeBefore(map, {
+      id: 'mc-street-casing',
+      type: 'line',
+      source: 'mc-streets',
+      minzoom: 9,
+      layout: { 'line-cap': 'round', 'line-join': 'round' },
+      paint: {
+        'line-color': 'rgba(7,16,30,0.5)',
+        'line-width': streetWidthExpression(1.55),
+        'line-opacity': 0.55
+      }
+    }, firstSymbol);
+    addLayerMaybeBefore(map, {
+      id: 'mc-street-line',
+      type: 'line',
+      source: 'mc-streets',
+      minzoom: 9,
+      layout: { 'line-cap': 'round', 'line-join': 'round' },
+      paint: {
+        'line-color': ['case',
+          ['in', ['get', 'classe'], ['literal', ['motorway', 'trunk']]], '#f2b134',
+          ['==', ['get', 'classe'], 'primary'], '#e0c060',
+          ['==', ['get', 'classe'], 'secondary'], '#a8b6cb',
+          '#8595ad'
+        ],
+        'line-width': streetWidthExpression(1),
+        'line-opacity': ['case',
+          ['in', ['get', 'classe'], ['literal', ['motorway', 'trunk']]], 0.92,
+          0.72
+        ]
+      }
+    }, firstSymbol);
+
+    /* --- rivers and canals --- */
+    addLayerMaybeBefore(map, {
+      id: 'mc-water-glow',
+      type: 'line',
+      source: 'mc-water',
+      minzoom: 10,
+      layout: { 'line-cap': 'round', 'line-join': 'round' },
+      paint: {
+        'line-color': '#38bdf8',
+        'line-width': ['interpolate', ['linear'], ['zoom'], 10,
+          ['case', ['==', ['get', 'tipo'], 'river'], 9, 5],
+          16,
+          ['case', ['==', ['get', 'tipo'], 'river'], 24, 12]],
+        'line-opacity': 0.16,
+        'line-blur': 5
+      }
+    }, firstSymbol);
+    addLayerMaybeBefore(map, {
+      id: 'mc-water-line',
+      type: 'line',
+      source: 'mc-water',
+      minzoom: 10,
+      layout: { 'line-cap': 'round', 'line-join': 'round' },
+      paint: {
+        'line-color': ['case', ['==', ['get', 'tipo'], 'river'], '#0ea5e9', '#38bdf8'],
+        'line-width': ['interpolate', ['linear'], ['zoom'], 10,
+          ['case', ['==', ['get', 'tipo'], 'river'], 3.2, 1.8],
+          16,
+          ['case', ['==', ['get', 'tipo'], 'river'], 8, 4.5]],
+        'line-opacity': 0.9
+      }
+    }, firstSymbol);
+
+    /* --- POIs (circle + inline icon) --- */
+    map.addLayer({
+      id: 'mc-poi-circle',
+      type: 'circle',
+      source: 'mc-pois',
+      paint: {
+        'circle-color': catColorExpression(),
+        'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 2.6, 13, 4.6, 16, 7.5],
+        'circle-stroke-color': '#07101e',
+        'circle-stroke-width': 1.4,
+        'circle-opacity': 0.96
+      }
+    });
+    registerPoiIcons(map);
+    map.addLayer({
+      id: 'mc-poi-icon',
+      type: 'symbol',
+      source: 'mc-pois',
+      minzoom: 13.2,
+      layout: {
+        'icon-image': ['concat', 'poi-', ['get', 'cat']],
+        'icon-size': ['interpolate', ['linear'], ['zoom'], 13.2, 0.34, 16, 0.56],
+        'icon-allow-overlap': false,
+        'icon-ignore-placement': false,
+        'icon-padding': 2
+      },
+      paint: { 'icon-opacity': 0.95 }
+    });
+
+    /* --- top labels --- */
+    map.addLayer({
+      id: 'mc-bairro-label',
+      type: 'symbol',
+      source: 'mc-bairros',
+      minzoom: 10.4,
+      layout: {
+        'text-field': ['get', 'nome'],
+        'text-font': pickFontStack(map, true),
+        'text-size': ['interpolate', ['linear'], ['zoom'],
+          11, ['case', ['==', ['get', 'tipo'], 'foco'], 11, 10],
+          14, ['case', ['==', ['get', 'tipo'], 'foco'], 15, 10.5],
+          16, ['case', ['==', ['get', 'tipo'], 'foco'], 18, 11]],
+        'text-letter-spacing': 0.06,
+        'text-allow-overlap': false,
+        'text-padding': 5,
+        'text-max-width': 7
+      },
+      paint: {
+        'text-color': ['case', ['==', ['get', 'tipo'], 'foco'], '#f7fbff', '#c6d4e6'],
+        'text-halo-color': ['case', ['==', ['get', 'tipo'], 'foco'], 'rgba(7,14,26,0.94)', 'rgba(7,14,26,0.7)'],
+        'text-halo-width': 1.7,
+        'text-halo-blur': 0.35,
+        'text-opacity': ['case', ['==', ['get', 'tipo'], 'foco'], 1, 0.72]
+      }
+    });
+    map.addLayer({
+      id: 'mc-water-label',
+      type: 'symbol',
+      source: 'mc-water',
+      minzoom: 13,
+      filter: ['==', ['get', 'tipo'], 'river'],
+      layout: {
+        'text-field': ['get', 'nome'],
+        'text-font': pickFontStack(map, false),
+        'text-size': ['interpolate', ['linear'], ['zoom'], 13, 10, 16, 13],
+        'symbol-placement': 'line',
+        'symbol-spacing': 320,
+        'text-letter-spacing': 0.1,
+        'text-keep-upright': true,
+        'text-padding': 4
+      },
+      paint: {
+        'text-color': '#0b4f78',
+        'text-halo-color': 'rgba(255,255,255,0.88)',
+        'text-halo-width': 1.2,
+        'text-opacity': 0.95
+      }
+    });
+  }
+  /* ---------------- POI category chips & legend ---------------- */
+  function buildChips() {
+    var wrap = $('#chips');
+    if (!wrap) { return; }
+    wrap.textContent = '';
+    CAT_KEYS.forEach(function (key) {
+      var cat = CATS[key];
+      var count = (DATA.pois || []).filter(function (p) { return p.cat === key; }).length;
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'chip';
+      button.dataset.cat = key;
+      button.setAttribute('aria-pressed', state.cats[key] ? 'true' : 'false');
+      button.setAttribute('aria-label', cat[state.lang] + ' (' + count + ')');
+      var dot = document.createElement('span');
+      dot.className = 'chip__dot';
+      dot.style.setProperty('--c', cat.color);
+      dot.setAttribute('aria-hidden', 'true');
+      var text = document.createElement('span');
+      text.className = 'chip__text';
+      text.textContent = cat[state.lang];
+      var num = document.createElement('span');
+      num.className = 'chip__count';
+      num.textContent = String(count);
+      button.appendChild(dot);
+      button.appendChild(text);
+      button.appendChild(num);
+      button.addEventListener('click', function () { toggleCat(key); });
+      wrap.appendChild(button);
+    });
+  }
+  function toggleCat(key) {
+    state.cats[key] = !state.cats[key];
+    syncChips();
+    applyPoiFilter();
+  }
+  function syncChips() {
+    $all('#chips .chip').forEach(function (button) {
+      button.setAttribute('aria-pressed', state.cats[button.dataset.cat] ? 'true' : 'false');
+    });
+  }
+  function resetCats() {
+    CAT_KEYS.forEach(function (key) { state.cats[key] = true; });
+    syncChips();
+    applyPoiFilter();
+  }
+  function poiFilterExpression() {
+    var selected = CAT_KEYS.filter(function (key) { return state.cats[key]; });
+    if (selected.length === CAT_KEYS.length) { return null; }
+    if (selected.length === 0) { return ['==', ['get', 'cat'], '__none__']; }
+    return ['in', ['get', 'cat'], ['literal', selected]];
+  }
+  function applyPoiFilter() {
+    var map = state.map;
+    if (!map) { return; }
+    var filter = poiFilterExpression();
+    ['mc-poi-circle', 'mc-poi-icon'].forEach(function (id) {
+      if (map.getLayer(id)) { map.setFilter(id, filter); }
+    });
+  }
+  function buildLegend() {
+    var body = $('#legend-body');
+    if (!body) { return; }
+    body.textContent = '';
+    var grid = document.createElement('div');
+    grid.className = 'legend__grid';
+    function addItem(kind, color, label, pinText) {
+      var item = document.createElement('div');
+      item.className = 'legend__item';
+      var mark = document.createElement('span');
+      mark.setAttribute('aria-hidden', 'true');
+      if (kind === 'dot') {
+        mark.className = 'legend__dot';
+        mark.style.setProperty('--c', color);
+      } else if (kind === 'line') {
+        mark.className = 'legend__line';
+        mark.style.setProperty('--c', color);
+      } else {
+        mark.className = 'legend__pin';
+        mark.textContent = pinText || '1';
+      }
+      item.appendChild(mark);
+      item.appendChild(document.createTextNode(label));
+      grid.appendChild(item);
+    }
+    if (DATA.bairros) {
+      DATA.bairros.features.forEach(function (feature) {
+        var props = feature.properties;
+        if (props.tipo === 'foco') { addItem('dot', props.cor, props.nome); }
+      });
+    }
+    addItem('pin', null, t('legendOpp'), '1');
+    CAT_KEYS.forEach(function (key) { addItem('dot', CATS[key].color, catLabel(key)); });
+    addItem('line', '#f2b134', t('legendRuas'));
+    addItem('line', '#38bdf8', t('legendRios'));
+    addItem('line', '#4a6f9e', t('legendBuildings'));
+    body.appendChild(grid);
+    var note = document.createElement('p');
+    note.className = 'legend__note';
+    note.textContent = t('legendPriorityNote');
+    grid.appendChild(note);
+  }
+
+  /* ---------------- language ---------------- */
+  function applyLanguage(lang) {
+    state.lang = lang === 'en' ? 'en' : 'pt';
+    try { window.localStorage.setItem('mc-lang', state.lang); } catch (err) { /* private mode */ }
+    document.documentElement.lang = state.lang === 'pt' ? 'pt-BR' : 'en';
+    $all('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      if (key) { el.textContent = t(key); }
+    });
+    $all('[data-i18n-aria]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-aria');
+      if (key) { el.setAttribute('aria-label', t(key)); }
+    });
+    $all('.lang-btn').forEach(function (btn) {
+      var active = btn.getAttribute('data-lang') === state.lang;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    var tourLabel = $('#tour-label');
+    if (tourLabel) { tourLabel.textContent = state.tour.running ? t('tourRunning') : t('tour'); }
+    buildChips();
+    buildLegend();
+    updateMarkerLabels();
+    updateTourButton();
+    if (state.activeOp) { renderOpPanel(); }
+    if (state.activeBairro) { renderBairroPanel(); }
+    if (state.tour.running) { updateTourHud(); }
+    refreshFatalLanguage();
+    setSplashStatus(state.splashKey);
+    document.title = t('title');
+    if (state.popup) {
+      try { state.popup.remove(); } catch (err) { /* ignore */ }
+      state.popup = null;
+    }
+  }
+
+  /* ---------------- layers / toggles ---------------- */
+  function applyLayerToggles() {
+    var map = state.map;
+    if (!map) { return; }
+    ['bairros', 'pois', 'ruas', 'rios', 'buildings'].forEach(function (group) {
+      var visible = !!state.layers[group];
+      (LAYER_GROUPS[group] || []).forEach(function (id) {
+        if (map.getLayer(id)) {
+          map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none');
+        }
+      });
+    });
+    if (state.layers.oportunidades) { addOpMarkers(); } else { removeOpMarkers(); }
+    if (map.getSource('terrain-dem')) {
+      if (state.layers.terrain) {
+        map.setTerrain({ source: 'terrain-dem', exaggeration: 1.12 });
+      } else {
+        map.setTerrain(null);
+      }
+    }
+  }
+  function setLayerState(key, value) {
+    if (!(key in state.layers)) { return; }
+    state.layers[key] = !!value;
+    applyLayerToggles();
+  }
+
+  /* ---------------- POI popup ---------------- */
+  function poiAddress(poi) {
+    var tags = poi.tags || {};
+    var parts = [];
+    if (tags['addr:street']) {
+      parts.push(tags['addr:street'] + (tags['addr:housenumber'] ? ', ' + tags['addr:housenumber'] : ''));
+    }
+    if (tags['addr:suburb']) { parts.push(tags['addr:suburb']); }
+    return parts.join(' · ');
+  }
+  function poiExtraTags(poi) {
+    var tags = poi.tags || {};
+    var chips = [];
+    if (tags.operator) { chips.push(tags.operator); }
+    if (tags.religion || tags.denomination) {
+      chips.push([tags.religion, tags.denomination].filter(Boolean).join(' · '));
+    }
+    if (poi.sub) { chips.push(String(poi.sub).replace(/_/g, ' ')); }
+    if (tags.sport) { chips.push(tags.sport); }
+    var seen = {};
+    return chips.filter(function (chip) {
+      var key = String(chip).toLowerCase();
+      if (!key || seen[key]) { return false; }
+      seen[key] = true;
+      return true;
+    }).slice(0, 4);
+  }
+  function openPoiPopup(feature, lngLat) {
+    if (state.popup) {
+      try { state.popup.remove(); } catch (err) { /* ignore */ }
+      state.popup = null;
+    }
+    var props = (feature && feature.properties) || {};
+    var poi = (DATA.poiById && DATA.poiById[props.id]) || {
+      id: props.id, nome: props.nome, cat: props.cat, sub: props.sub, tags: {}
+    };
+    var cat = CATS[poi.cat] || { color: '#94a3b8', pt: poi.cat, en: poi.cat };
+    var name = poi.nome || t('poiFallback');
+    var address = poiAddress(poi);
+    var tags = poiExtraTags(poi);
+    var el = document.createElement('div');
+    el.className = 'poi-pop';
+    var html = '<div class="poi-pop__cat"><span class="poi-dot" style="--c:' + esc(cat.color) + '"></span>' +
+      esc(cat[state.lang] || cat.pt) + '</div><h3>' + esc(name) + '</h3>';
+    if (address) { html += '<p class="poi-pop__addr">' + esc(address) + '</p>'; }
+    if (tags.length) {
+      html += '<div class="poi-pop__tags">' + tags.map(function (tag) {
+        return '<span class="poi-tag">' + esc(tag) + '</span>';
+      }).join('') + '</div>';
+    }
+    el.innerHTML = html;
+    var position = (lngLat && typeof lngLat.lng === 'number') ? lngLat : feature.geometry.coordinates;
+    state.popup = new maplibregl.Popup({
+      closeButton: true,
+      closeOnClick: true,
+      offset: 16,
+      maxWidth: '280px',
+      className: 'mc-popup'
+    }).setLngLat(position).setDOMContent(el).addTo(state.map);
+  }
+
+  /* ---------------- map interactions ---------------- */
+  function attachMapEvents(map) {
+    function onBairroClick(event) {
+      if (event.features && event.features.length) {
+        openBairro(event.features[0].properties);
+      }
+    }
+    function onPoiClick(event) {
+      if (event.features && event.features.length) {
+        openPoiPopup(event.features[0], event.lngLat);
+      }
+    }
+    map.on('click', 'mc-bairro-fill', onBairroClick);
+    map.on('click', 'mc-bairro-extrude', onBairroClick);
+    map.on('click', 'mc-poi-circle', onPoiClick);
+    map.on('click', 'mc-poi-icon', onPoiClick);
+    ['mc-bairro-fill', 'mc-bairro-extrude', 'mc-poi-circle', 'mc-poi-icon'].forEach(function (id) {
+      map.on('mouseenter', id, function () { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', id, function () { map.getCanvas().style.cursor = ''; });
+    });
+    map.on('click', function (event) {
+      var features = map.queryRenderedFeatures(event.point, {
+        layers: ['mc-bairro-fill', 'mc-poi-circle', 'mc-poi-icon'].filter(function (id) { return map.getLayer(id); })
+      });
+      if (!features.length) { closeBairroPanel(); }
+    });
+    map.on('movestart', function () {
+      if (state.popup) {
+        try { state.popup.remove(); } catch (err) { /* ignore */ }
+        state.popup = null;
+      }
+    });
+  }
+
+  /* ---------------- opportunity markers ---------------- */
+  function buildOpMarkers(map) {
+    state.opMarkers.forEach(function (marker) {
+      try { marker.remove(); } catch (err) { /* ignore */ }
+    });
+    state.opMarkers = [];
+    if (!DATA.opportunities) { return; }
+    DATA.opportunities.forEach(function (op) {
+      var el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'op-pin' + (op.prioridade === 1 ? ' is-priority' : '');
+      el.dataset.num = String(op.num);
+      el.setAttribute('aria-controls', 'op-panel');
+      el.setAttribute('aria-expanded', 'false');
+      el.style.zIndex = op.prioridade === 1 ? '12' : '10';
+      var halo = document.createElement('span');
+      halo.className = 'op-pin__halo';
+      halo.setAttribute('aria-hidden', 'true');
+      var num = document.createElement('span');
+      num.className = 'op-pin__num';
+      num.textContent = String(op.num);
+      el.appendChild(halo);
+      el.appendChild(num);
+      el.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        openOpportunity(op.num, { fly: false });
+      });
+      var marker = new maplibregl.Marker({
+        element: el,
+        anchor: 'center',
+        opacity: 1,
+        opacityWhenCovered: 1
+      }).setLngLat([op.lon, op.lat]);
+      marker._el = el;
+      marker._op = op;
+      marker._added = false;
+      if (state.layers.oportunidades) {
+        marker.addTo(map);
+        marker._added = true;
+      }
+      state.opMarkers.push(marker);
+    });
+    updateMarkerLabels();
+    setMarkerStates();
+  }
+  function updateMarkerLabels() {
+    state.opMarkers.forEach(function (marker) {
+      if (!marker._el || !marker._op) { return; }
+      marker._el.setAttribute('aria-label', t('openOp') + ' ' + marker._op.num + ': ' + opName(marker._op) + ' — ' + t('priority') + ' ' + marker._op.prioridade);
+      marker._el.setAttribute('title', opName(marker._op));
+    });
+  }
+  function addOpMarkers() {
+    var map = state.map;
+    if (!map) { return; }
+    state.opMarkers.forEach(function (marker) {
+      if (!marker._added) {
+        try { marker.addTo(map); marker._added = true; } catch (err) { /* ignore */ }
+      }
+    });
+  }
+  function removeOpMarkers() {
+    state.opMarkers.forEach(function (marker) {
+      if (marker._added) {
+        try { marker.remove(); marker._added = false; } catch (err) { /* ignore */ }
+      }
+    });
+  }
+  function setMarkerStates() {
+    state.opMarkers.forEach(function (marker) {
+      if (!marker._el || !marker._op) { return; }
+      var active = !!(state.activeOp && marker._op.num === state.activeOp.num);
+      marker._el.classList.toggle('is-active', active);
+      marker._el.setAttribute('aria-expanded', active ? 'true' : 'false');
+    });
+  }
+  function findMarker(num) {
+    for (var i = 0; i < state.opMarkers.length; i += 1) {
+      if (state.opMarkers[i]._op && state.opMarkers[i]._op.num === num) { return state.opMarkers[i]; }
+    }
+    return null;
+  }
+
+  /* ---------------- bairro panel ---------------- */
+  function bairroColor(bairroName) {
+    var features = (DATA.bairros && DATA.bairros.features) || [];
+    if (!bairroName) { return '#94a3b8'; }
+    var i;
+    for (i = 0; i < features.length; i += 1) {
+      var nome = features[i].properties.nome || '';
+      if (nome && bairroName.indexOf(nome) === 0) { return features[i].properties.cor || '#94a3b8'; }
+    }
+    for (i = 0; i < features.length; i += 1) {
+      var nome2 = features[i].properties.nome || '';
+      if (nome2 && bairroName.indexOf(nome2) !== -1) { return features[i].properties.cor || '#94a3b8'; }
+    }
+    return '#94a3b8';
+  }
+  function openBairro(props) {
+    if (!props) { return; }
+    state.activeBairro = {
+      key: props.key,
+      nome: props.nome,
+      tipo: props.tipo,
+      cor: props.cor || '#8a94a6'
+    };
+    closeOpPanel({ silent: true });
+    renderBairroPanel();
+    var panel = $('#bairro-panel');
+    if (panel) {
+      panel.classList.add('is-open');
+      panel.setAttribute('aria-hidden', 'false');
+      panel.removeAttribute('inert');
+    }
+    var name = state.activeBairro.nome;
+    announce(name + ' — ' + (state.activeBairro.tipo === 'foco' ? t('bairroFocus') : t('bairroContext')));
+  }
+  function renderBairroPanel() {
+    var bairro = state.activeBairro;
+    if (!bairro) { return; }
+    var info = BAIRRO_INFO[bairro.key];
+    if (!info && DATA.bairros) {
+      var match = DATA.bairros.features.filter(function (f) { return f.properties.key === bairro.key; })[0];
+      if (match && BAIRRO_INFO[match.properties.key]) { info = BAIRRO_INFO[match.properties.key]; }
+    }
+    if (!info) { info = CONTEXT_BAIRRO_INFO; }
+    var nameEl = $('#bairro-name');
+    var kindEl = $('#bairro-kind');
+    var descEl = $('#bairro-desc');
+    var panel = $('#bairro-panel');
+    if (nameEl) { nameEl.textContent = bairro.nome; }
+    if (kindEl) { kindEl.textContent = bairro.tipo === 'foco' ? t('bairroFocus') : t('bairroContext'); }
+    if (descEl) { descEl.textContent = info[state.lang] || info.pt; }
+    if (panel) { panel.style.setProperty('--c', bairro.cor || '#8a94a6'); }
+  }
+  function closeBairroPanel() {
+    var panel = $('#bairro-panel');
+    state.activeBairro = null;
+    if (!panel) { return; }
+    panel.classList.remove('is-open');
+    panel.setAttribute('aria-hidden', 'true');
+    panel.setAttribute('inert', '');
+  }
+
+  /* ---------------- opportunity drawer ---------------- */
+  function renderOpPanel() {
+    var op = state.activeOp;
+    if (!op) { return; }
+    var pt = state.lang !== 'en';
+    var numEl = $('#op-num');
+    var kicker = $('#op-kicker');
+    var title = $('#op-title');
+    var alt = $('#op-name-alt');
+    if (numEl) { numEl.textContent = String(op.num); }
+    if (kicker) { kicker.textContent = t('opWord') + ' ' + op.num + ' · ' + t('priority') + ' ' + op.prioridade; }
+    if (title) { title.textContent = opName(op); }
+    if (alt) {
+      alt.textContent = opAltName(op);
+      alt.lang = pt ? 'en' : 'pt-BR';
+    }
+    var meta = $('#op-meta');
+    if (meta) {
+      meta.textContent = '';
+      var bairroPill = document.createElement('span');
+      bairroPill.className = 'meta-pill';
+      var dot = document.createElement('span');
+      dot.className = 'meta-pill__dot';
+      dot.style.setProperty('--c', bairroColor(op.bairro));
+      dot.setAttribute('aria-hidden', 'true');
+      bairroPill.appendChild(dot);
+      bairroPill.appendChild(document.createTextNode(t('bairroLabel') + ': ' + op.bairro));
+      meta.appendChild(bairroPill);
+      var prio = document.createElement('span');
+      prio.className = 'meta-pill meta-pill--prio';
+      prio.style.setProperty('--p', PRIORITY_COLORS[op.prioridade] || '#ffd166');
+      prio.textContent = t('priority') + ' ' + op.prioridade;
+      meta.appendChild(prio);
+    }
+    var body = $('#op-body');
+    if (!body) { return; }
+    body.textContent = '';
+    function addSection(label, content, extraClass) {
+      var section = document.createElement('section');
+      section.className = 'op-section' + (extraClass ? ' ' + extraClass : '');
+      var heading = document.createElement('h3');
+      heading.textContent = label;
+      section.appendChild(heading);
+      section.appendChild(content);
+      body.appendChild(section);
+      return section;
+    }
+    function paragraph(text) {
+      var el = document.createElement('p');
+      el.textContent = text || '';
+      return el;
+    }
+    addSection(t('publico'), paragraph(pt ? op.publico_pt : op.publico_en));
+    addSection(t('descricao'), paragraph(pt ? op.descricao_pt : op.descricao_en));
+    var list = document.createElement('ul');
+    list.className = 'op-list';
+    (pt ? op.atividades_pt : op.atividades_en).forEach(function (activity) {
+      var li = document.createElement('li');
+      li.textContent = activity;
+      list.appendChild(li);
+    });
+    addSection(t('atividades'), list);
+    var quote = document.createElement('div');
+    quote.className = 'op-quote';
+    quote.textContent = pt ? op.justificativa_pt : op.justificativa_en;
+    addSection(t('justificativa'), quote);
+    addSection(t('impacto'), paragraph(pt ? op.impacto_pt : op.impacto_en));
+    addSection(t('parcerias'), paragraph(pt ? op.parcerias_pt : op.parcerias_en), 'op-section--partnership');
+  }
+  function openOpportunity(num, options) {
+    if (!DATA.opportunities) { return false; }
+    var found = null;
+    DATA.opportunities.forEach(function (op) {
+      if (op.num === Number(num)) { found = op; }
+    });
+    if (!found) { return false; }
+    closeBairroPanel();
+    if (isNarrow()) { setPanelOpen(false); }
+    state.activeOp = found;
+    renderOpPanel();
+    var panel = $('#op-panel');
+    if (panel) {
+      panel.classList.add('is-open');
+      panel.setAttribute('aria-hidden', 'false');
+      panel.removeAttribute('inert');
+      var scroller = panel.querySelector('.op-panel__scroll');
+      if (scroller) { scroller.scrollTop = 0; }
+    }
+    syncHash(found.num);
+    setMarkerStates();
+    announce(t('opWord') + ' ' + found.num + ': ' + opName(found));
+    if (options && options.fly && state.mapReady && state.map) {
+      state.map.flyTo({
+        center: [found.lon, found.lat],
+        zoom: Math.max(state.map.getZoom(), 15.1),
+        pitch: Math.max(state.map.getPitch(), 56),
+        bearing: state.map.getBearing(),
+        duration: state.reduced ? 0 : 1700,
+        essential: false
+      });
+    }
+    var closeBtn = $('#op-close');
+    if (closeBtn) {
+      window.setTimeout(function () {
+        try { closeBtn.focus({ preventScroll: true }); } catch (err) { closeBtn.focus(); }
+      }, options && options.fly ? 320 : 40);
+    }
+    return true;
+  }
+  function closeOpPanel(options) {
+    var panel = $('#op-panel');
+    var previous = state.activeOp;
+    state.activeOp = null;
+    if (panel) {
+      panel.classList.remove('is-open');
+      panel.setAttribute('aria-hidden', 'true');
+      panel.setAttribute('inert', '');
+    }
+    setMarkerStates();
+    if (options && options.silent) { return; }
+    syncHash(null);
+    if (previous) {
+      var marker = findMarker(previous.num);
+      if (marker && marker._el) {
+        try { marker._el.focus({ preventScroll: true }); } catch (err) { /* ignore */ }
+      }
+      announce(t('closePanel'));
+    }
+  }
+  function centerActiveOp() {
+    if (!state.activeOp || !state.mapReady || !state.map) { return; }
+    state.map.flyTo({
+      center: [state.activeOp.lon, state.activeOp.lat],
+      zoom: Math.max(state.map.getZoom(), 15.4),
+      pitch: Math.max(state.map.getPitch(), 58),
+      bearing: state.map.getBearing(),
+      duration: state.reduced ? 0 : 1400
+    });
+  }
+  function copyActiveOpLink() {
+    if (!state.activeOp) { return; }
+    var url = location.href.split('#')[0] + '#op-' + state.activeOp.num;
+    function fallback() {
+      var area = document.createElement('textarea');
+      area.value = url;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.top = '-1000px';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      try { document.execCommand('copy'); } catch (err) { /* ignore */ }
+      document.body.removeChild(area);
+      showToast(t('copied'));
+      announce(t('copied'));
+    }
+    announce(t('copied'));
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function () { showToast(t('copied')); }, fallback);
+    } else {
+      fallback();
+    }
+  }
+  function readHashOp() {
+    var raw = String(location.hash || '').replace(/^#/, '');
+    var match = raw.match(/^op[-=](\d{1,2})$/i);
+    return match ? Number(match[1]) : null;
+  }
+  function readDeepLinkOp() {
+    var fromHash = readHashOp();
+    if (fromHash) { return fromHash; }
+    try {
+      var params = new URLSearchParams(location.search);
+      var value = params.get('op');
+      if (value && /^\d{1,2}$/.test(value)) { return Number(value); }
+    } catch (err) { /* very old browser */ }
+    return null;
+  }
+  function syncHash(num) {
+    var base = location.href.split('#')[0];
+    var target = num ? base + '#op-' + num : base;
+    if (location.href === target) { return; }
+    try { history.replaceState(null, '', target); } catch (err) {
+      location.hash = num ? 'op-' + num : '';
+    }
+  }
+  function handleHashChange() {
+    var wanted = readHashOp();
+    if (wanted) {
+      if (!state.activeOp || state.activeOp.num !== wanted) {
+        openOpportunity(wanted, { fly: true });
+      }
+    } else if (state.activeOp) {
+      closeOpPanel({ silent: true });
+    }
+  }
+
+  /* ---------------- controls panel (mobile sheet) ---------------- */
+  function setPanelOpen(open) {
+    var panel = $('#panel');
+    var fab = $('#panel-toggle');
+    if (!panel) { return; }
+    state.panelOpen = !!open;
+    if (state.panelOpen) {
+      panel.classList.add('is-open');
+      panel.removeAttribute('inert');
+      if (fab) {
+        fab.setAttribute('aria-expanded', 'true');
+        fab.setAttribute('aria-label', t('closeControls'));
+      }
+      var closeBtn = $('#panel-close');
+      if (closeBtn) {
+        try { closeBtn.focus({ preventScroll: true }); } catch (err) { closeBtn.focus(); }
+      }
+    } else {
+      panel.classList.remove('is-open');
+      if (isNarrow()) { panel.setAttribute('inert', ''); }
+      if (fab) {
+        fab.setAttribute('aria-expanded', 'false');
+        fab.setAttribute('aria-label', t('openControls'));
+        try { fab.focus({ preventScroll: true }); } catch (err) { fab.focus(); }
+      }
+    }
+  }
+  function syncPanelMode() {
+    var panel = $('#panel');
+    var fab = $('#panel-toggle');
+    if (!panel) { return; }
+    if (isNarrow()) {
+      if (!state.panelOpen) {
+        panel.classList.remove('is-open');
+        panel.setAttribute('inert', '');
+        if (fab) { fab.setAttribute('aria-expanded', 'false'); }
+      }
+    } else {
+      state.panelOpen = false;
+      panel.classList.remove('is-open');
+      panel.removeAttribute('inert');
+      if (fab) { fab.setAttribute('aria-expanded', 'false'); }
+    }
+  }
+
+  /* ---------------- tour ---------------- */
+  var TOUR_STOPS = [
+    { key: 'Itatiaia', name: 'Itatiaia', center: [-43.3022, -22.7779], zoom: 15.15, pitch: 62, bearing: -38 },
+    { key: 'Vila Sao Luiz', name: 'Vila São Luiz', center: [-43.2896, -22.7784], zoom: 15.2, pitch: 60, bearing: -16 },
+    { key: 'Parque Sarapui', name: 'Parque Sarapuí', center: [-43.2837, -22.7863], zoom: 15.1, pitch: 58, bearing: 22 },
+    { key: 'Sarapui', name: 'Sarapuí', center: [-43.2969, -22.7497], zoom: 14.7, pitch: 60, bearing: -8 }
+  ];
+  function wait(ms) {
+    return new Promise(function (resolve) { window.setTimeout(resolve, ms); });
+  }
+  function tourActive(token) {
+    return state.tour.running && token === state.tour.token;
+  }
+  function flyWait(target, token, duration) {
+    return new Promise(function (resolve) {
+      var map = state.map;
+      if (!map || !tourActive(token)) { resolve(); return; }
+      var finished = false;
+      var safety = null;
+      function done() {
+        if (finished) { return; }
+        finished = true;
+        if (safety) { window.clearTimeout(safety); }
+        try { map.off('moveend', done); } catch (err) { /* ignore */ }
+        resolve();
+      }
+      if (state.reduced) {
+        map.jumpTo({ center: target.center, zoom: target.zoom, pitch: target.pitch, bearing: target.bearing });
+        window.setTimeout(done, 1100);
+        return;
+      }
+      safety = window.setTimeout(done, duration + 2800);
+      map.once('moveend', done);
+      map.flyTo({
+        center: target.center,
+        zoom: target.zoom,
+        pitch: target.pitch,
+        bearing: target.bearing,
+        duration: duration,
+        curve: 1.42,
+        essential: false,
+        easing: function (x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
+      });
+    });
+  }
+  function showTourHud(index) {
+    var stop = TOUR_STOPS[index];
+    if (!stop) { return; }
+    var info = BAIRRO_INFO[stop.key] || CONTEXT_BAIRRO_INFO;
+    var step = $('#tour-step');
+    var name = $('#tour-name');
+    var desc = $('#tour-desc');
+    var hud = $('#tour-hud');
+    if (step) { step.textContent = (index + 1) + ' / ' + TOUR_STOPS.length; }
+    if (name) { name.textContent = stop.name; }
+    if (desc) { desc.textContent = info[state.lang] || info.pt; }
+    if (hud) { hud.hidden = false; }
+  }
+  function hideTourHud() {
+    var hud = $('#tour-hud');
+    if (hud) { hud.hidden = true; }
+  }
+  function updateTourHud() {
+    if (state.tour.running && state.tour.index >= 0) { showTourHud(state.tour.index); }
+    else { hideTourHud(); }
+  }
+  function updateTourButton() {
+    var button = $('#tour-btn');
+    var label = $('#tour-label');
+    if (!button) { return; }
+    var running = state.tour.running;
+    button.setAttribute('aria-pressed', running ? 'true' : 'false');
+    button.classList.toggle('is-running', running);
+    if (label) { label.textContent = running ? t('tourRunning') : t('tour'); }
+  }
+  function startTour() {
+    if (state.tour.running) { stopTour(); return; }
+    if (!state.mapReady || !state.map) { return; }
+    if (isNarrow()) { setPanelOpen(false); }
+    closeOpPanel({ silent: false });
+    closeBairroPanel();
+    if (!state.layers.bairros) {
+      var bairroToggle = $('#t-bairros');
+      if (bairroToggle) { bairroToggle.checked = true; }
+      state.layers.bairros = true;
+      applyLayerToggles();
+    }
+    state.tour.running = true;
+    state.tour.index = -1;
+    var token = state.tour.token + 1;
+    state.tour.token = token;
+    updateTourButton();
+    hideTourHud();
+    announce(t('tour'));
+    flyWait(getOverview(), token, 1200).then(function () {
+      var chain = Promise.resolve();
+      TOUR_STOPS.forEach(function (stop, index) {
+        chain = chain.then(function () {
+          if (!tourActive(token)) { return null; }
+          state.tour.index = index;
+          showTourHud(index);
+          announce(stop.name);
+          return flyWait(stop, token, 3400).then(function () {
+            return wait(state.reduced ? 1400 : 800);
+          }).then(function () { hideTourHud(); });
+        });
+      });
+      return chain.then(function () {
+        if (!tourActive(token)) { return null; }
+        state.tour.index = -1;
+        hideTourHud();
+        return flyWait(getOverview(), token, 2300);
+      });
+    }).then(function () {
+      if (tourActive(token)) { stopTour({ silent: true }); }
+    }).catch(function (err) {
+      if (window.console && console.warn) { console.warn('[map] tour interrupted:', err); }
+      if (tourActive(token)) { stopTour({ silent: true }); }
+    });
+  }
+  function stopTour(options) {
+    var wasRunning = state.tour.running;
+    state.tour.running = false;
+    state.tour.token += 1;
+    state.tour.index = -1;
+    hideTourHud();
+    updateTourButton();
+    if (wasRunning && !(options && options.silent)) {
+      showToast(t('tourStopped'));
+      announce(t('tourStopped'));
+    }
+  }
+  function resetView() {
+    if (!state.map || !state.mapReady) { return; }
+    stopTour({ silent: true });
+    closeOpPanel({ silent: true });
+    closeBairroPanel();
+    syncHash(null);
+    if (state.popup) {
+      try { state.popup.remove(); } catch (err) { /* ignore */ }
+      state.popup = null;
+    }
+    var view = getOverview();
+    state.map.flyTo({
+      center: view.center,
+      zoom: view.zoom,
+      pitch: view.pitch,
+      bearing: view.bearing,
+      duration: state.reduced ? 0 : 1600,
+      curve: 1.35,
+      essential: true
+    });
+  }
+
+  /* ---------------- keyboard & focus ---------------- */
+  function trapFocus(event) {
+    if (event.key !== 'Tab') { return; }
+    var panel = $('#op-panel');
+    if (!panel || !panel.classList.contains('is-open')) { return; }
+    var focusable = $all('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', panel).filter(function (el) {
+      return !el.disabled && el.offsetParent !== null;
+    });
+    if (!focusable.length) { return; }
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+  function onGlobalKeydown(event) {
+    if (event.key !== 'Escape' && event.key !== 'Esc') { return; }
+    if (state.activeOp) {
+      event.preventDefault();
+      closeOpPanel();
+      return;
+    }
+    var bairroPanel = $('#bairro-panel');
+    if (bairroPanel && bairroPanel.classList.contains('is-open')) {
+      event.preventDefault();
+      closeBairroPanel();
+      return;
+    }
+    if (state.popup) {
+      try { state.popup.remove(); } catch (err) { /* ignore */ }
+      state.popup = null;
+      return;
+    }
+    if (state.tour.running) {
+      event.preventDefault();
+      stopTour();
+      return;
+    }
+    if (state.panelOpen) {
+      event.preventDefault();
+      setPanelOpen(false);
+    }
+  }
+
+  /* ---------------- initialization ---------------- */
+  function initUI() {
+    refreshReducedMotion();
+    try {
+      var matchMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (matchMediaQuery.addEventListener) {
+        matchMediaQuery.addEventListener('change', refreshReducedMotion);
+      } else if (matchMediaQuery.addListener) {
+        matchMediaQuery.addListener(refreshReducedMotion);
+      }
+      var stored = window.localStorage.getItem('mc-lang');
+      if (stored === 'en' || stored === 'pt') { state.lang = stored; }
+    } catch (err) { /* ignore storage/privacy errors */ }
+
+    $all('[data-toggle]').forEach(function (input) {
+      var key = input.getAttribute('data-toggle');
+      if (key in state.layers) { input.checked = !!state.layers[key]; }
+      input.addEventListener('change', function () {
+        setLayerState(key, input.checked);
+      });
+    });
+    var catsAll = $('#cats-all');
+    if (catsAll) { catsAll.addEventListener('click', resetCats); }
+    $all('.lang-btn').forEach(function (button) {
+      button.addEventListener('click', function () { applyLanguage(button.getAttribute('data-lang')); });
+    });
+    var tourBtn = $('#tour-btn');
+    if (tourBtn) { tourBtn.addEventListener('click', startTour); }
+    var resetBtn = $('#reset-btn');
+    if (resetBtn) { resetBtn.addEventListener('click', resetView); }
+    var fab = $('#panel-toggle');
+    if (fab) { fab.addEventListener('click', function () { setPanelOpen(!state.panelOpen); }); }
+    var panelClose = $('#panel-close');
+    if (panelClose) { panelClose.addEventListener('click', function () { setPanelOpen(false); }); }
+    var opClose = $('#op-close');
+    if (opClose) { opClose.addEventListener('click', function () { closeOpPanel(); }); }
+    var bairroClose = $('#bairro-close');
+    if (bairroClose) { bairroClose.addEventListener('click', closeBairroPanel); }
+    var centerBtn = $('#op-center');
+    if (centerBtn) { centerBtn.addEventListener('click', centerActiveOp); }
+    var copyBtn = $('#op-copy');
+    if (copyBtn) { copyBtn.addEventListener('click', copyActiveOpLink); }
+    var tourStop = $('#tour-stop');
+    if (tourStop) { tourStop.addEventListener('click', function () { stopTour(); }); }
+    var retryBtn = $('#retry-btn');
+    if (retryBtn) { retryBtn.addEventListener('click', function () { boot(); }); }
+    var opPanel = $('#op-panel');
+    if (opPanel) {
+      opPanel.addEventListener('keydown', trapFocus);
+      if (!opPanel.classList.contains('is-open')) { opPanel.setAttribute('inert', ''); }
+    }
+    document.addEventListener('keydown', onGlobalKeydown);
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleHashChange);
+    var narrowQuery = window.matchMedia('(max-width: 760px)');
+    function onNarrowChange() { syncPanelMode(); }
+    if (narrowQuery.addEventListener) { narrowQuery.addEventListener('change', onNarrowChange); }
+    else if (narrowQuery.addListener) { narrowQuery.addListener(onNarrowChange); }
+    syncPanelMode();
+    applyLanguage(state.lang);
+    updateTourButton();
+  }
+
+  function startApp() {
+    initUI();
+    buildChips();
+    buildLegend();
+    applyLanguage(state.lang);
+    boot();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startApp);
+  } else {
+    startApp();
+  }
+})();
+</script>
+</body>
+</html>

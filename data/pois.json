@@ -1,0 +1,2184 @@
+[
+{
+"id": "n331873876",
+"nome": "Duque de Caxias",
+"cat": "transporte",
+"lat": -22.787167,
+"lon": -43.309552,
+"sub": "",
+"tags": {
+"operator": "SuperVia"
+}
+},
+{
+"id": "n1753580298",
+"nome": "Multi Market",
+"cat": "comercio",
+"lat": -22.787773,
+"lon": -43.308986,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n1753580327",
+"nome": "Centro de Distribuição 25 de Agosto - Correios",
+"cat": "social",
+"lat": -22.788136,
+"lon": -43.309308,
+"sub": "",
+"tags": {
+"operator": "Correios"
+}
+},
+{
+"id": "n1756788061",
+"nome": "Farma Life",
+"cat": "saude",
+"lat": -22.789858,
+"lon": -43.307068,
+"sub": "pharmacy",
+"tags": {
+"addr:street": "Avenida Brigadeiro Lima e Silva"
+}
+},
+{
+"id": "n1756848943",
+"nome": "Prezunic - Centenário",
+"cat": "comercio",
+"lat": -22.780145,
+"lon": -43.309994,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n1756874320",
+"nome": "Academia Kuruky Fitness",
+"cat": "lazer",
+"lat": -22.781208,
+"lon": -43.302691,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n1795738658",
+"nome": "Mercado",
+"cat": "comercio",
+"lat": -22.774506,
+"lon": -43.295763,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n2211412853",
+"nome": "",
+"cat": "transporte",
+"lat": -22.77238,
+"lon": -43.306704,
+"sub": "",
+"tags": {
+"operator": "SuperVia"
+}
+},
+{
+"id": "n2242372875",
+"nome": "Mercado Municipal de Duque de Caxias",
+"cat": "comercio",
+"lat": -22.789268,
+"lon": -43.309103,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n2242733172",
+"nome": "Mercado Bis",
+"cat": "comercio",
+"lat": -22.784023,
+"lon": -43.294872,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n2242733173",
+"nome": "Colégio Estadual Miguel Couto",
+"cat": "educacao",
+"lat": -22.786066,
+"lon": -43.291267,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n2242733176",
+"nome": "Colégio Estadual Vinícius de Moraes",
+"cat": "educacao",
+"lat": -22.787218,
+"lon": -43.295049,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n2242733177",
+"nome": "Praça do Cuzeiro",
+"cat": "lazer",
+"lat": -22.786718,
+"lon": -43.298219,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n2242733178",
+"nome": "Escola Municipal Professor Oneres Nunes de Oliveira",
+"cat": "educacao",
+"lat": -22.785452,
+"lon": -43.297141,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n3637982243",
+"nome": "Comunidade São Sebastião",
+"cat": "fe",
+"lat": -22.771324,
+"lon": -43.290869,
+"sub": "christian",
+"tags": {
+"addr:street": "Rua Prudente de Moraes",
+"religion": "christian",
+"denomination": "roman_catholic"
+}
+},
+{
+"id": "n3637982246",
+"nome": "Núcleo São Camilo (colégio)",
+"cat": "fe",
+"lat": -22.779532,
+"lon": -43.291183,
+"sub": "christian",
+"tags": {
+"addr:street": "Avenida Brasil",
+"religion": "christian",
+"denomination": "catholic"
+}
+},
+{
+"id": "n3637982247",
+"nome": "Comunidade Santa Terezinha do Menino Jesus",
+"cat": "fe",
+"lat": -22.771514,
+"lon": -43.301968,
+"sub": "christian",
+"tags": {
+"addr:street": "Rua Castro Alves",
+"religion": "christian",
+"denomination": "roman_catholic"
+}
+},
+{
+"id": "n3637982248",
+"nome": "Comunidade São João Batista",
+"cat": "fe",
+"lat": -22.778642,
+"lon": -43.306609,
+"sub": "christian",
+"tags": {
+"addr:street": "Rua Cel. França Soares",
+"addr:housenumber": "194",
+"religion": "christian",
+"denomination": "roman_catholic"
+}
+},
+{
+"id": "n4644423290",
+"nome": "Supermercado Nossa Rede",
+"cat": "comercio",
+"lat": -22.774812,
+"lon": -43.291746,
+"sub": "",
+"tags": {
+"addr:street": "Rua Prudente de Moraes",
+"opening_hours": "Mo-Sa 07:00-20:00; Su 07:00-14:00"
+}
+},
+{
+"id": "n4644423291",
+"nome": "Educandário Santa Cecília",
+"cat": "educacao",
+"lat": -22.774464,
+"lon": -43.297039,
+"sub": "",
+"tags": {
+"addr:street": "Avenida Expedicionário José Amaro",
+"opening_hours": "Mo-Fr 07:00-18:00"
+}
+},
+{
+"id": "n4987422923",
+"nome": "TECNOMEDI CAXIAS II",
+"cat": "comercio",
+"lat": -22.788857,
+"lon": -43.309003,
+"sub": "",
+"tags": {
+"addr:street": "Avenida Presidente Vargas",
+"addr:housenumber": "292",
+"phone": "+55 21 3774 5573",
+"opening_hours": "Mo-Fr 09:00-18:30; Sa 09:00-13:00"
+}
+},
+{
+"id": "n5613796123",
+"nome": "Premier",
+"cat": "lazer",
+"lat": -22.779869,
+"lon": -43.303928,
+"sub": "",
+"tags": {
+"addr:street": "Avenida Presidente Tancredo Neves"
+}
+},
+{
+"id": "n6028512819",
+"nome": "Igreja Assembléia de Deus",
+"cat": "fe",
+"lat": -22.772149,
+"lon": -43.296358,
+"sub": "christian",
+"tags": {
+"addr:street": "Rua general manoel rabelo",
+"addr:housenumber": "752",
+"religion": "christian"
+}
+},
+{
+"id": "n6424386533",
+"nome": "phisical shape",
+"cat": "lazer",
+"lat": -22.775181,
+"lon": -43.295923,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n6424386535",
+"nome": "assembleia de Deus vitoria em cristo",
+"cat": "fe",
+"lat": -22.774973,
+"lon": -43.295773,
+"sub": "christian",
+"tags": {
+"religion": "christian",
+"denomination": "pentecostal"
+}
+},
+{
+"id": "n7422824315",
+"nome": "Assaí Atacadista",
+"cat": "comercio",
+"lat": -22.775813,
+"lon": -43.308637,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n11076232090",
+"nome": "Igreja Manancias | Duque de Caxias",
+"cat": "fe",
+"lat": -22.7813,
+"lon": -43.304424,
+"sub": "christian",
+"tags": {
+"addr:street": "Avenida Presidente Tancredo Neves",
+"addr:housenumber": "80",
+"opening_hours": "CULTOS DOMINGO // 9H E 11H30 QUARTA // 19H30 SALA DE ORAÇÃO SEGUNDA-FEIRA // 18H QUARTA-FEIRA // 18H SEXTA-FEIRA // 18H REUNIÃO DE HOMENS (QUINZENAL) TERÇA-FEIRA // 19H30 PRESS POWER SEXTA-FEIRA // 20H",
+"religion": "christian"
+}
+},
+{
+"id": "n12086509976",
+"nome": "Igreja Adventista do Sétimo Dia - Movimento de Reforma",
+"cat": "fe",
+"lat": -22.789029,
+"lon": -43.306684,
+"sub": "christian",
+"tags": {
+"religion": "christian"
+}
+},
+{
+"id": "n12086509981",
+"nome": "Academia Smart Fit - Duque de Caxias",
+"cat": "lazer",
+"lat": -22.789037,
+"lon": -43.306425,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n12086509998",
+"nome": "Maple Bear - Duque de Caxias",
+"cat": "educacao",
+"lat": -22.789745,
+"lon": -43.306247,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n13334693754",
+"nome": "Biblioteca da Unigranrio",
+"cat": "social",
+"lat": -22.78865,
+"lon": -43.305526,
+"sub": "",
+"tags": {}
+},
+{
+"id": "n14071008801",
+"nome": "Edifício Tower Center",
+"cat": "saude",
+"lat": -22.785312,
+"lon": -43.307913,
+"sub": "",
+"tags": {
+"addr:street": "Rua Conde de Porto Alegre",
+"addr:housenumber": "477"
+}
+},
+{
+"id": "n3637982245",
+"nome": "Comunidade Santa Tereza d'Avila",
+"cat": "fe",
+"lat": -22.782945,
+"lon": -43.286954,
+"sub": "christian",
+"tags": {
+"addr:street": "Av. Brasil",
+"addr:housenumber": "20",
+"religion": "christian",
+"denomination": "roman_catholic"
+}
+},
+{
+"id": "n4579543491",
+"nome": "M & D Piscina's Bar",
+"cat": "lazer",
+"lat": -22.773236,
+"lon": -43.289169,
+"sub": "",
+"tags": {
+"addr:street": "Avenida Leandro da Mota",
+"addr:housenumber": "1400",
+"phone": "+55 21 97395 1424",
+"opening_hours": "Tu-Su 09:00-18:00"
+}
+},
+{
+"id": "n331874228",
+"nome": "Gramacho",
+"cat": "transporte",
+"lat": -22.751669,
+"lon": -43.304217,
+"sub": "",
+"tags": {
+"operator": "SuperVia"
+}
+},
+{
+"id": "n2959102879",
+"nome": "Casa & Video",
+"cat": "comercio",
+"lat": -22.751988,
+"lon": -43.305241,
+"sub": "",
+"tags": {
+"addr:street": "RJ-101",
+"addr:housenumber": "45",
+"opening_hours": "Mo-Sa 09:00-19:00"
+}
+},
+{
+"id": "n4272314996",
+"nome": "Igreja Batista em Doutor Laureano",
+"cat": "fe",
+"lat": -22.7602,
+"lon": -43.292861,
+"sub": "",
+"tags": {
+"addr:street": "Avenida Chopin",
+"addr:housenumber": "24",
+"phone": "+55 21 99596 5454",
+"opening_hours": "Su 09:00-11:00, 19:30-21:00; Th 20:00-21:00"
+}
+},
+{
+"id": "n4272348800",
+"nome": "Igreja Batista em Doutor Laureano",
+"cat": "fe",
+"lat": -22.760095,
+"lon": -43.292886,
+"sub": "christian",
+"tags": {
+"addr:street": "Avenida Chopin",
+"addr:housenumber": "24",
+"phone": "+55 21 99596-5454",
+"religion": "christian",
+"denomination": "baptist"
+}
+},
+{
+"id": "n12092412115",
+"nome": "Hospital do Olho Julio Candido de Brito",
+"cat": "saude",
+"lat": -22.766721,
+"lon": -43.295624,
+"sub": "hospital",
+"tags": {}
+},
+{
+"id": "n13334693779",
+"nome": "Piscina da Genilda",
+"cat": "lazer",
+"lat": -22.768405,
+"lon": -43.303475,
+"sub": "",
+"tags": {
+"addr:street": "Rua João Alves Torres Filho",
+"addr:housenumber": "2829"
+}
+},
+{
+"id": "n13896923378",
+"nome": "Droga Raia",
+"cat": "saude",
+"lat": -22.751416,
+"lon": -43.305845,
+"sub": "pharmacy",
+"tags": {
+"addr:street": "Avenida Governador Leonel de Moura Brizola",
+"addr:housenumber": "1519",
+"opening_hours": "Mo-Su 07:00-23:00"
+}
+},
+{
+"id": "n1756884779",
+"nome": "Carrefour",
+"cat": "comercio",
+"lat": -22.767782,
+"lon": -43.288893,
+"sub": "",
+"tags": {
+"addr:street": "Rod. Washigton Luiz"
+}
+},
+{
+"id": "n3148242053",
+"nome": "Comunidade N.S. da Penha",
+"cat": "fe",
+"lat": -22.759046,
+"lon": -43.281667,
+"sub": "christian",
+"tags": {
+"religion": "christian"
+}
+},
+{
+"id": "n3415275596",
+"nome": "Comunidade São Pedro",
+"cat": "fe",
+"lat": -22.759185,
+"lon": -43.2723,
+"sub": "christian",
+"tags": {
+"addr:street": "Rua Plainha",
+"addr:housenumber": "L-17 Q-150",
+"religion": "christian",
+"denomination": "catholic"
+}
+},
+{
+"id": "n3415294836",
+"nome": "Comunidade Sagrada Família",
+"cat": "fe",
+"lat": -22.764176,
+"lon": -43.277548,
+"sub": "christian",
+"tags": {
+"addr:street": "Rua 25 de Junho",
+"addr:housenumber": "1",
+"religion": "christian",
+"denomination": "catholic"
+}
+},
+{
+"id": "n3415304229",
+"nome": "Colegio ABC",
+"cat": "educacao",
+"lat": -22.76342,
+"lon": -43.281236,
+"sub": "",
+"tags": {
+"addr:street": "Rua Anajás"
+}
+},
+{
+"id": "n3637982240",
+"nome": "Comunidade N.S. Aparecida",
+"cat": "fe",
+"lat": -22.759418,
+"lon": -43.283595,
+"sub": "christian",
+"tags": {
+"religion": "christian"
+}
+},
+{
+"id": "n3637982242",
+"nome": "Comunidade São Jorge",
+"cat": "fe",
+"lat": -22.764817,
+"lon": -43.289603,
+"sub": "christian",
+"tags": {
+"addr:street": "Pça Carlos de Laet",
+"religion": "christian",
+"denomination": "roman_catholic"
+}
+},
+{
+"id": "n3637982241",
+"nome": "Comunidade Santa Clara",
+"cat": "fe",
+"lat": -22.749576,
+"lon": -43.278403,
+"sub": "christian",
+"tags": {
+"addr:street": "Rua do Perdão",
+"religion": "christian"
+}
+},
+{
+"id": "w88150155",
+"nome": "Terminal Rodoviário Prefeito José Carlos Lacerda",
+"cat": "transporte",
+"lat": -22.780634,
+"lon": -43.307832,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w164015977",
+"nome": "SESI",
+"cat": "lazer",
+"lat": -22.782468,
+"lon": -43.307679,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w164023784",
+"nome": "15º Batalhão da Polícia Militar",
+"cat": "seguranca",
+"lat": -22.780973,
+"lon": -43.310309,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w168288310",
+"nome": "Praça da Bandeira",
+"cat": "lazer",
+"lat": -22.774058,
+"lon": -43.296231,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w168288311",
+"nome": "Faculdade de Educação da Baixada Fluminense - UERJ Duque de Caxias",
+"cat": "educacao",
+"lat": -22.775434,
+"lon": -43.297029,
+"sub": "",
+"tags": {
+"operator": "Universidade do Estado do Rio de Janeiro"
+}
+},
+{
+"id": "w168288315",
+"nome": "Praça da Apoteose",
+"cat": "lazer",
+"lat": -22.777491,
+"lon": -43.292736,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w176440579",
+"nome": "Unigranrio",
+"cat": "educacao",
+"lat": -22.788617,
+"lon": -43.305893,
+"sub": "",
+"tags": {
+"addr:street": "Rua Professor José de Souza Herdy",
+"addr:housenumber": "1160"
+}
+},
+{
+"id": "w179898822",
+"nome": "Praça Roberto Silveira",
+"cat": "lazer",
+"lat": -22.789956,
+"lon": -43.30767,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w370651892",
+"nome": "Paróquia Imaculada Conceição",
+"cat": "fe",
+"lat": -22.774008,
+"lon": -43.296155,
+"sub": "christian",
+"tags": {
+"addr:street": "Pça. da Bandeira",
+"religion": "christian",
+"denomination": "roman_catholic"
+}
+},
+{
+"id": "w521079058",
+"nome": "Praça da Maçonaria",
+"cat": "lazer",
+"lat": -22.786268,
+"lon": -43.306485,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w544898417",
+"nome": "Shopping Unigranrio",
+"cat": "comercio",
+"lat": -22.789205,
+"lon": -43.306443,
+"sub": "",
+"tags": {
+"addr:street": "Rua Professor José de Souza Herdy"
+}
+},
+{
+"id": "w611896780",
+"nome": "Terminal Plínio Casado",
+"cat": "transporte",
+"lat": -22.783941,
+"lon": -43.309478,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w615323743",
+"nome": "Campo 2 da Apoteose",
+"cat": "lazer",
+"lat": -22.776834,
+"lon": -43.293085,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w615323744",
+"nome": "Campo 1 da Apoteose",
+"cat": "lazer",
+"lat": -22.777074,
+"lon": -43.293351,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w615323745",
+"nome": "Campinho 2 da Apoteose",
+"cat": "lazer",
+"lat": -22.777801,
+"lon": -43.292443,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w615323746",
+"nome": "Campinho 1 da Apoteose",
+"cat": "lazer",
+"lat": -22.777894,
+"lon": -43.292542,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w639842325",
+"nome": "Praça Francisco Gonçalves Moura",
+"cat": "lazer",
+"lat": -22.77192,
+"lon": -43.297941,
+"sub": "",
+"tags": {
+"addr:street": "Cruzamento da tancredo neves com a rua josé de alencar"
+}
+},
+{
+"id": "w671540659",
+"nome": "Praça do Industriário",
+"cat": "lazer",
+"lat": -22.782893,
+"lon": -43.3067,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w685528300",
+"nome": "clinica são vicente",
+"cat": "saude",
+"lat": -22.775857,
+"lon": -43.29581,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w936941692",
+"nome": "Praça do Cruzeiro",
+"cat": "lazer",
+"lat": -22.786676,
+"lon": -43.29814,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w944725695",
+"nome": "Campo do Arnão",
+"cat": "lazer",
+"lat": -22.784657,
+"lon": -43.293955,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1074992797",
+"nome": "Sase Saúde Caxias",
+"cat": "saude",
+"lat": -22.78033,
+"lon": -43.300097,
+"sub": "",
+"tags": {
+"addr:street": "Rua Itacibá",
+"addr:housenumber": "741"
+}
+},
+{
+"id": "w1077110707",
+"nome": "Hospital Daniel Lipp",
+"cat": "saude",
+"lat": -22.787041,
+"lon": -43.308537,
+"sub": "",
+"tags": {
+"addr:street": "Rua Conde de Porto Alegre",
+"addr:housenumber": "271",
+"opening_hours": "24/7"
+}
+},
+{
+"id": "w1080263705",
+"nome": "Posto de Saude Odontológica Professor José de Souza Herdy",
+"cat": "saude",
+"lat": -22.787188,
+"lon": -43.298516,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1106479799",
+"nome": "Pracinha",
+"cat": "lazer",
+"lat": -22.773039,
+"lon": -43.300097,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1128217861",
+"nome": "Praça da Passarela",
+"cat": "lazer",
+"lat": -22.78353,
+"lon": -43.309174,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1165645247",
+"nome": "Igreja Deus e Amor",
+"cat": "fe",
+"lat": -22.783174,
+"lon": -43.306009,
+"sub": "christian",
+"tags": {
+"religion": "christian",
+"denomination": "pentecostal"
+}
+},
+{
+"id": "w1168536564",
+"nome": "Pracinha",
+"cat": "lazer",
+"lat": -22.781608,
+"lon": -43.300599,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1168536565",
+"nome": "Pracinha da Paulicéia",
+"cat": "lazer",
+"lat": -22.781331,
+"lon": -43.303065,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1206761614",
+"nome": "Praça Ulysses Guimarães",
+"cat": "lazer",
+"lat": -22.789363,
+"lon": -43.30727,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1304960690",
+"nome": "Quadra da Unigranrio",
+"cat": "lazer",
+"lat": -22.788514,
+"lon": -43.306337,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1305164909",
+"nome": "Caxias Shopping",
+"cat": "comercio",
+"lat": -22.78753,
+"lon": -43.287471,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1305602427",
+"nome": "Praça da Conceição",
+"cat": "lazer",
+"lat": -22.774814,
+"lon": -43.306178,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1305603444",
+"nome": "Arena do Corte Oito/Posto Avançado da Fundec",
+"cat": "lazer",
+"lat": -22.771966,
+"lon": -43.309407,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1453998160",
+"nome": "Só Vem",
+"cat": "comercio",
+"lat": -22.789328,
+"lon": -43.306937,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1453998161",
+"nome": "Praça Designer Hebert Tomazine",
+"cat": "lazer",
+"lat": -22.781672,
+"lon": -43.308876,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1534056954",
+"nome": "Corte Oito",
+"cat": "transporte",
+"lat": -22.772377,
+"lon": -43.306706,
+"sub": "",
+"tags": {
+"operator": "SuperVia"
+}
+},
+{
+"id": "w777874286",
+"nome": "Hospital Municipal Moacyr Rodrigues do Carmo",
+"cat": "saude",
+"lat": -22.783588,
+"lon": -43.284512,
+"sub": "",
+"tags": {
+"addr:street": "Rodovia Washington Luiz",
+"addr:housenumber": "3200"
+}
+},
+{
+"id": "w931813353",
+"nome": "Caxias Shopping",
+"cat": "comercio",
+"lat": -22.786833,
+"lon": -43.286557,
+"sub": "",
+"tags": {
+"operator": "Aliansce",
+"addr:street": "Rodovia Washington Luiz",
+"opening_hours": "Mo-Sa 08:00-20:00"
+}
+},
+{
+"id": "w1370389578",
+"nome": "Centro de Treinamento Almirante Heleno de Barros Nunes",
+"cat": "lazer",
+"lat": -22.782162,
+"lon": -43.283775,
+"sub": "",
+"tags": {
+"operator": "Club de Regatas Vasco da Gama",
+"addr:street": "Rodovia Washington Luiz",
+"addr:housenumber": "Km 3"
+}
+},
+{
+"id": "w235992274",
+"nome": "Praça Doutor Laureano",
+"cat": "lazer",
+"lat": -22.767241,
+"lon": -43.295964,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w370651697",
+"nome": "Comunidade Cristo Libertador",
+"cat": "fe",
+"lat": -22.761702,
+"lon": -43.297431,
+"sub": "christian",
+"tags": {
+"addr:street": "Rua Tomé de Souza",
+"addr:housenumber": "63",
+"religion": "christian",
+"denomination": "roman_catholic"
+}
+},
+{
+"id": "w520816767",
+"nome": "Praça do Rio Branco",
+"cat": "lazer",
+"lat": -22.753512,
+"lon": -43.309817,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w553878418",
+"nome": "Praça da Bíblia",
+"cat": "lazer",
+"lat": -22.760211,
+"lon": -43.303709,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w700379280",
+"nome": "Campo da Paraiso",
+"cat": "lazer",
+"lat": -22.762408,
+"lon": -43.290427,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w700379281",
+"nome": "Praça da Paraíso",
+"cat": "lazer",
+"lat": -22.762569,
+"lon": -43.29058,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w795475644",
+"nome": "Transportes Santo Antônio",
+"cat": "transporte",
+"lat": -22.754056,
+"lon": -43.294349,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w797160783",
+"nome": "CIEP Municipalizado 097 Carlos Chagas Brasil-China",
+"cat": "educacao",
+"lat": -22.749179,
+"lon": -43.302835,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w802065862",
+"nome": "Campo do Franciscão",
+"cat": "lazer",
+"lat": -22.760404,
+"lon": -43.297215,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w923013395",
+"nome": "Assembleia de Deus Vitoria em Cristo",
+"cat": "fe",
+"lat": -22.75085,
+"lon": -43.306289,
+"sub": "christian",
+"tags": {
+"religion": "christian",
+"denomination": "ADVEC"
+}
+},
+{
+"id": "w992732680",
+"nome": "Praça São Jorge",
+"cat": "lazer",
+"lat": -22.765045,
+"lon": -43.289971,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w992732683",
+"nome": "Praça do Paraíso",
+"cat": "lazer",
+"lat": -22.76263,
+"lon": -43.290474,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w992732684",
+"nome": "Praça de Esportes Franciscão",
+"cat": "lazer",
+"lat": -22.76044,
+"lon": -43.297362,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w998473799",
+"nome": "Praça do Sarapuí",
+"cat": "lazer",
+"lat": -22.751128,
+"lon": -43.29588,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1000925475",
+"nome": "Praça da Guaíra",
+"cat": "lazer",
+"lat": -22.751168,
+"lon": -43.298656,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1000925477",
+"nome": "Praça da Rondon",
+"cat": "lazer",
+"lat": -22.763256,
+"lon": -43.303786,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1000925478",
+"nome": "Praça do Grajaú",
+"cat": "lazer",
+"lat": -22.7686,
+"lon": -43.305641,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1305622692",
+"nome": "Praça dos Aposentados",
+"cat": "lazer",
+"lat": -22.760083,
+"lon": -43.29514,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w486647336",
+"nome": "Praça Moacyr do Carmo",
+"cat": "lazer",
+"lat": -22.759237,
+"lon": -43.277637,
+"sub": "",
+"tags": {
+"addr:street": "Rua Ajaré"
+}
+},
+{
+"id": "w486648462",
+"nome": "Igreja Assembleia de Deus",
+"cat": "fe",
+"lat": -22.761917,
+"lon": -43.278026,
+"sub": "christian",
+"tags": {
+"addr:street": "Rua Almeirim",
+"religion": "christian",
+"denomination": "pentecostal"
+}
+},
+{
+"id": "w486649001",
+"nome": "Praça do Jorge",
+"cat": "lazer",
+"lat": -22.760303,
+"lon": -43.277536,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w562292717",
+"nome": "Soccer field",
+"cat": "lazer",
+"lat": -22.760104,
+"lon": -43.277218,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w746437660",
+"nome": "Carrefour",
+"cat": "comercio",
+"lat": -22.767675,
+"lon": -43.289322,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w790980333",
+"nome": "CIEP 218 Brasil-Turquia",
+"cat": "educacao",
+"lat": -22.755756,
+"lon": -43.285267,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1010409571",
+"nome": "3º Colégio da Polícia Militar do Estado do Rio de Janeiro - Percy Geraldo Bolsonaro",
+"cat": "educacao",
+"lat": -22.75329,
+"lon": -43.288085,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1457838627",
+"nome": "Praça do Planetário",
+"cat": "lazer",
+"lat": -22.750799,
+"lon": -43.275497,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w796647425",
+"nome": "Praça da Reta do Bicão",
+"cat": "lazer",
+"lat": -22.74679,
+"lon": -43.308218,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w797160781",
+"nome": "Praça Artur Lundgren",
+"cat": "lazer",
+"lat": -22.749308,
+"lon": -43.304268,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w805198355",
+"nome": "Colégio Estadual São Bento",
+"cat": "educacao",
+"lat": -22.749682,
+"lon": -43.303252,
+"sub": "",
+"tags": {}
+},
+{
+"id": "w1002973651",
+"nome": "Parque Osório de Oliveira Filho",
+"cat": "lazer",
+"lat": -22.747311,
+"lon": -43.297827,
+"sub": "",
+"tags": {
+"opening_hours": "24/7"
+}
+},
+{
+"id": "w1457827756",
+"nome": "Fut Mesa",
+"cat": "lazer",
+"lat": -22.747594,
+"lon": -43.301719,
+"sub": "",
+"tags": {}
+},
+{
+"id": "cnes9640061",
+"nome": "Odontosul",
+"cat": "saude",
+"lat": -22.7788,
+"lon": -43.308496,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Vila Centenario",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes9672176",
+"nome": "Otocare Servicos Medicos",
+"cat": "saude",
+"lat": -22.787676,
+"lon": -43.308427,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes9891951",
+"nome": "Hilario De O Barbosa Servicos Medicos",
+"cat": "saude",
+"lat": -22.794602,
+"lon": -43.297942,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes175382",
+"nome": "Rmf Clinica Odontologica",
+"cat": "saude",
+"lat": -22.786,
+"lon": -43.312,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes5701554",
+"nome": "Roberto Dos Santos Mitraud",
+"cat": "saude",
+"lat": -22.785253,
+"lon": -43.309888,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes8573042",
+"nome": "Fonomed Servicos De Saude Caxias 2",
+"cat": "saude",
+"lat": -22.7885,
+"lon": -43.3082,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes8050899",
+"nome": "Rafael Gualberto",
+"cat": "saude",
+"lat": -22.791025,
+"lon": -43.305973,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes1082329",
+"nome": "Ana Paula Ribeiro Santos Nassar",
+"cat": "saude",
+"lat": -22.787676,
+"lon": -43.308427,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes5837618",
+"nome": "Hgf Hospital Geral Nossa Senhora De Fatima",
+"cat": "saude",
+"lat": -22.790267,
+"lon": -43.303508,
+"sub": "hospital",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes6489044",
+"nome": "Cmpk Centro Medico",
+"cat": "saude",
+"lat": -22.774551,
+"lon": -43.307445,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Centenario",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes1161652",
+"nome": "Meire Moura Lacerda",
+"cat": "saude",
+"lat": -22.791255,
+"lon": -43.304671,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes1161784",
+"nome": "Bruna Dantas Barbosa",
+"cat": "saude",
+"lat": -22.78548,
+"lon": -43.310101,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes4922786",
+"nome": "A Nossa Drogaria De Caxias Caxias 43",
+"cat": "saude",
+"lat": -22.78953,
+"lon": -43.30728,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes8350957",
+"nome": "Instituto De Saude Espaco Terapeutico",
+"cat": "saude",
+"lat": -22.791002,
+"lon": -43.306692,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes8357250",
+"nome": "Jm Clinic",
+"cat": "saude",
+"lat": -22.785381,
+"lon": -43.309608,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Vila Sao Luiz",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes657646",
+"nome": "Saude Vida",
+"cat": "saude",
+"lat": -22.786954,
+"lon": -43.307575,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes657670",
+"nome": "Sorio Clinica De Emergencia 24 Horas",
+"cat": "saude",
+"lat": -22.786551,
+"lon": -43.302473,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Parque Pauliceia",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes657700",
+"nome": "Solution Gestao Assistencial",
+"cat": "saude",
+"lat": -22.787142,
+"lon": -43.308277,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes1154176",
+"nome": "Rodrigo Maia De Oliveira",
+"cat": "saude",
+"lat": -22.787166,
+"lon": -43.308304,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes1163108",
+"nome": "Dra Valeria Da Rocha Ginecologia E Saude Da Mulher",
+"cat": "saude",
+"lat": -22.785796,
+"lon": -43.310337,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes9722866",
+"nome": "Cardioclinicos Associados Servicos Medicos",
+"cat": "saude",
+"lat": -22.789793,
+"lon": -43.30744,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes72478",
+"nome": "Botelho E Barcia",
+"cat": "saude",
+"lat": -22.800633,
+"lon": -43.292549,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes107077",
+"nome": "Vitallita Filial Caxias",
+"cat": "saude",
+"lat": -22.786,
+"lon": -43.312,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes118877",
+"nome": "Humanizalab Caxias",
+"cat": "saude",
+"lat": -22.791197,
+"lon": -43.306453,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "SIM"
+}
+},
+{
+"id": "cnes255084",
+"nome": "Hospital Mario Lioni Pediatria",
+"cat": "saude",
+"lat": -22.785253,
+"lon": -43.31,
+"sub": "hospital",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes258822",
+"nome": "Neurorad",
+"cat": "saude",
+"lat": -22.789487,
+"lon": -43.307982,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes313998",
+"nome": "Daniel Eugenio Figueiredo",
+"cat": "saude",
+"lat": -22.789307,
+"lon": -43.311164,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Centenario",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes2277603",
+"nome": "Centro Municipal De Saude De Duque De Caxias",
+"cat": "saude",
+"lat": -22.794119,
+"lon": -43.308797,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jd 25 De Agosto",
+"sus": "SIM"
+}
+},
+{
+"id": "cnes2277670",
+"nome": "Clinica Da Familia Sarapui",
+"cat": "saude",
+"lat": -22.757935,
+"lon": -43.293006,
+"sub": "ubs",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Sarapui",
+"sus": "SIM"
+}
+},
+{
+"id": "cnes2277689",
+"nome": "Ceata Centro De Atencao Total Ao Adolescentes",
+"cat": "saude",
+"lat": -22.785946,
+"lon": -43.307829,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "SIM"
+}
+},
+{
+"id": "cnes2931788",
+"nome": "Marcio Cavalcante Carneiro",
+"cat": "saude",
+"lat": -22.79084,
+"lon": -43.30587,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes2931869",
+"nome": "Lifemed Clinica Exames",
+"cat": "saude",
+"lat": -22.788115,
+"lon": -43.308539,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes2931990",
+"nome": "Superar Espaco Terapeutico E Educacional",
+"cat": "saude",
+"lat": -22.785777,
+"lon": -43.311989,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes2990989",
+"nome": "R Fernandes Servicos Medicos Ltda",
+"cat": "saude",
+"lat": -22.786004,
+"lon": -43.311936,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes3003264",
+"nome": "Hospital De Clinicas Sao Vicente",
+"cat": "saude",
+"lat": -22.775828,
+"lon": -43.295762,
+"sub": "hospital",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Vila Sao Luiz",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes3014681",
+"nome": "Hospital Mario Lioni",
+"cat": "saude",
+"lat": -22.786315,
+"lon": -43.305659,
+"sub": "hospital",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes3587487",
+"nome": "Alberto Zavao Lima",
+"cat": "saude",
+"lat": -22.78856,
+"lon": -43.30647,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes3587525",
+"nome": "Leila Villas Boas Domingues",
+"cat": "saude",
+"lat": -22.78856,
+"lon": -43.30647,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes3592480",
+"nome": "Uroduc Servicos Medicos Ltda",
+"cat": "saude",
+"lat": -22.78854,
+"lon": -43.30656,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes3592502",
+"nome": "Sonia Cristina Jorge Dias Moraes",
+"cat": "saude",
+"lat": -22.79043,
+"lon": -43.306771,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes3592529",
+"nome": "Benjamin Baptista De Almeida",
+"cat": "saude",
+"lat": -22.789854,
+"lon": -43.307338,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes3622185",
+"nome": "Sandra Maria De Oliveira Fernandes",
+"cat": "saude",
+"lat": -22.791223,
+"lon": -43.303509,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes3670600",
+"nome": "Alberto Iorio Arruzzo",
+"cat": "saude",
+"lat": -22.79072,
+"lon": -43.3073,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes4660056",
+"nome": "Hummana Mais Duque De Caxias",
+"cat": "saude",
+"lat": -22.785116,
+"lon": -43.307995,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes4660102",
+"nome": "Dra Aline Ribeiro",
+"cat": "saude",
+"lat": -22.78894,
+"lon": -43.30672,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes4666860",
+"nome": "Odontohouse",
+"cat": "saude",
+"lat": -22.790027,
+"lon": -43.298429,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes4713397",
+"nome": "Cmedic Especalidades",
+"cat": "saude",
+"lat": -22.785153,
+"lon": -43.310283,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes4760247",
+"nome": "Odonto E Cia Caxias",
+"cat": "saude",
+"lat": -22.800585,
+"lon": -43.292352,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes4771508",
+"nome": "Antares Medicina E Diagnostico",
+"cat": "saude",
+"lat": -22.78878,
+"lon": -43.28447,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Vila Sao Luiz",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes4779363",
+"nome": "Centro De Fisioterapia Vila Sao Luis",
+"cat": "saude",
+"lat": -22.781478,
+"lon": -43.292859,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Vila Sao Luis",
+"sus": "SIM"
+}
+},
+{
+"id": "cnes5286719",
+"nome": "Sheila Mannarino Fabiano",
+"cat": "saude",
+"lat": -22.78924,
+"lon": -43.30734,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes5286735",
+"nome": "Marco Consultorio",
+"cat": "saude",
+"lat": -22.791108,
+"lon": -43.305438,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes5360218",
+"nome": "Hospital Santa Branca Ltda",
+"cat": "saude",
+"lat": -22.883,
+"lon": -43.104,
+"sub": "hospital",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes5369568",
+"nome": "Clinica Odontologica Julio Azambuja Ltda",
+"cat": "saude",
+"lat": -22.785152,
+"lon": -43.308025,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes6121705",
+"nome": "Uti Rio Servicos Medicos Ltda",
+"cat": "saude",
+"lat": -22.787084,
+"lon": -43.308528,
+"sub": "hospital",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes6129110",
+"nome": "Angio Vitor Servicos Medicos Filial",
+"cat": "saude",
+"lat": -22.789409,
+"lon": -43.307716,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes6268986",
+"nome": "Laparo S Clinica Medica Ltda",
+"cat": "saude",
+"lat": -22.78515,
+"lon": -43.30804,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes6277233",
+"nome": "Cires",
+"cat": "saude",
+"lat": -22.751759,
+"lon": -43.294966,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Sarapui",
+"sus": "SIM"
+}
+},
+{
+"id": "cnes7000693",
+"nome": "Cci Clinica Do Coracao Infantil Ltda",
+"cat": "saude",
+"lat": -22.79116,
+"lon": -43.30349,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes7011032",
+"nome": "Notre Dame Intermedica Saude S A",
+"cat": "saude",
+"lat": -22.78891,
+"lon": -43.30647,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes7041896",
+"nome": "Clinica Oftalmologica Duque De Caxias",
+"cat": "saude",
+"lat": -22.791197,
+"lon": -43.306968,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes7064306",
+"nome": "Centro De Tratamento Medico E Psicologico Ltda",
+"cat": "saude",
+"lat": -22.7908,
+"lon": -43.30714,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes7064357",
+"nome": "Capsad Renato Russo",
+"cat": "saude",
+"lat": -22.784113,
+"lon": -43.315593,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "SIM"
+}
+},
+{
+"id": "cnes7111509",
+"nome": "Clinica Medica Bertella Ltda",
+"cat": "saude",
+"lat": -22.788929,
+"lon": -43.306663,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes7121768",
+"nome": "Cristiane Jesus",
+"cat": "saude",
+"lat": -22.790982,
+"lon": -43.305221,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes7124805",
+"nome": "Clinica Espaco Saude Oral Plena Ltda",
+"cat": "saude",
+"lat": -22.791802,
+"lon": -43.303408,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes7757824",
+"nome": "Heloisa Dias Gamal",
+"cat": "saude",
+"lat": -22.787359,
+"lon": -43.308277,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes7845545",
+"nome": "Labormed Caxias 1",
+"cat": "saude",
+"lat": -22.790558,
+"lon": -43.307447,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes7850123",
+"nome": "Espaco Ortopedia",
+"cat": "saude",
+"lat": -22.785392,
+"lon": -43.307914,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes9383832",
+"nome": "Solution Prime",
+"cat": "saude",
+"lat": -22.787102,
+"lon": -43.308556,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes9455833",
+"nome": "Maria Tereza Ribeiro Alves Ferreira",
+"cat": "saude",
+"lat": -22.790336,
+"lon": -43.30868,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+},
+{
+"id": "cnes9515135",
+"nome": "021 Dental Caxias",
+"cat": "saude",
+"lat": -22.787676,
+"lon": -43.308427,
+"sub": "clinica",
+"tags": {
+"fonte": "CNES/DATASUS 2026",
+"bairro": "Jardim 25 De Agosto",
+"sus": "NAO"
+}
+}
+]

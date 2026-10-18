@@ -1,0 +1,322 @@
+[
+ {
+  "id": "op-1",
+  "num": 1,
+  "nome_pt": "Mutirão Esperança em Itatiaia",
+  "nome_en": "Hope Task Force in Itatiaia",
+  "bairro": "Itatiaia",
+  "prioridade": 1,
+  "lat": -22.7779,
+  "lon": -43.3018,
+  "publico_pt": "Famílias de baixa renda, idosos que moram sozinhos e famílias monoparentais em Itatiaia (≈12–18 mil moradores, estimativa).",
+  "publico_en": "Low-income families, elderly living alone and single-parent households in Itatiaia (≈12–18k residents, estimate).",
+  "descricao_pt": "Visitas domiciliares em duplas, com escuta, oração e pequenos reparos (pintura, portas, rampas, limpeza de calhas), além de uma mesa de apoio para CadÚnico, Cartão SUS e documentos. Cada visita termina com convite a um estudo bíblico e a um grupo pequeno.",
+  "descricao_en": "Two-person home visits with listening, prayer and small repairs (painting, doors, ramps, drain clearing), plus a support desk for social benefits, SUS card and documents. Every visit ends with an invitation to a Bible study and a small group.",
+  "atividades_pt": [
+   "Duplas missionárias com roteiro de escuta e oração",
+   "Micro-mutirão de reparos e acessibilidade",
+   "Mesa de apoio: CadÚnico, Cartão SUS, documentos e currículo",
+   "Encaminhamento à UBS mais próxima e convite à série evangelística"
+  ],
+  "atividades_en": [
+   "Missionary pairs with a listening and prayer script",
+   "Micro task force: repairs and accessibility",
+   "Support desk: social benefits, SUS card, documents, CV",
+   "Referral to the nearest health unit and invitation to the evening series"
+  ],
+  "justificativa_pt": "Itatiaia não tem nenhum estabelecimento de saúde registrado no CNES, apesar de concentrar 12–18 mil moradores (estimativa); 30,4% dos adultos do município não concluíram o fundamental e 8,3% dos domicílios têm esgoto inadequado. A igreja adventista local (225 membros) é a base natural.",
+  "justificativa_en": "Itatiaia has no health facility registered in CNES despite 12–18k residents (estimate); 30.4% of municipal adults did not finish primary school and 8.3% of households have inadequate sewage. The local Adventist church (225 members) is the natural base.",
+  "impacto_pt": "150–300 casas visitadas em 10 dias; 40–80 intervenções práticas; 60–120 encaminhamentos à saúde/assistência; 30–60 contatos para estudo bíblico.",
+  "impacto_en": "150–300 homes visited in 10 days; 40–80 practical interventions; 60–120 health/social referrals; 30–60 Bible-study contacts.",
+  "parcerias_pt": "IASD Itatiaia (Rua Caibar Schutel, 419), associação de moradores, comércio de material de construção, UBS de Vila São Luís. Riscos: furto na rua (não exibir celular), entrada em casas (regra dos dois adultos) e promessas de reforma que não podem ser cumpridas.",
+  "parcerias_en": "Itatiaia Adventist church (Rua Caibar Schutel, 419), residents' association, builders' merchants, Vila São Luís health unit. Risks: street theft (no visible phones), entering homes (two-adult rule), promising repairs that cannot be delivered."
+ },
+ {
+  "id": "op-2",
+  "num": 2,
+  "nome_pt": "Feira de Saúde “Vida e Esperança”",
+  "nome_en": "“Life and Hope” Health Fair",
+  "bairro": "Vila São Luiz",
+  "prioridade": 2,
+  "lat": -22.77749,
+  "lon": -43.29274,
+  "publico_pt": "Adultos 30+, idosos, hipertensos e diabéticos, gestantes e famílias sem acompanhamento recente.",
+  "publico_en": "Adults 30+, elderly, hypertensive and diabetic people, pregnant women and families without recent check-ups.",
+  "descricao_pt": "Dois dias de feira de saúde em praças revitalizadas, com aferição de pressão e glicemia, avaliação nutricional, orientação farmacêutica, saúde bucal e encaminhamento para a Clínica da Família. Profissionais voluntários supervisionam os jovens em cada estação.",
+  "descricao_en": "Two days of health fairs in revitalised squares: blood pressure and glucose screening, nutritional assessment, medication guidance, oral health and referral to the Family Clinic. Volunteer professionals supervise the youth at every station.",
+  "atividades_pt": [
+   "Pressão arterial, glicemia capilar, IMC e acuidade visual",
+   "Estação “traga suas receitas”: revisão de medicamentos",
+   "Saúde bucal, higiene e kits",
+   "Estação de oração e encaminhamento para a Clínica da Família"
+  ],
+  "atividades_en": [
+   "Blood pressure, capillary glucose, BMI and visual acuity",
+   "“Bring your prescriptions” medication review station",
+   "Oral health, hygiene and kits",
+   "Prayer station and referral to the Family Clinic"
+  ],
+  "justificativa_pt": "A atenção básica é fina: três equipes públicas em Sarapuí e nenhuma unidade registrada em Itatiaia; 15,9% da população tem 60+ anos e a nova Clínica da Família Sarapuí (capacidade de 24.500 atendimentos/mês) precisa de captação de pacientes.",
+  "justificativa_en": "Primary care is thin: three public teams in Sarapuí and no registered unit in Itatiaia; 15.9% of the population is 60+ and the new Sarapuí Family Clinic (24,500 visits/month capacity) needs patient outreach.",
+  "impacto_pt": "300–600 pessoas triadas; 100–200 encaminhamentos; 50–100 contatos para visitas e estudos bíblicos.",
+  "impacto_en": "300–600 people screened; 100–200 referrals; 50–100 contacts for visits and Bible studies.",
+  "parcerias_pt": "Clínica da Família Sarapuí (Av. Chopin, 307-A), UBS Vila São Luís, UPA 24h Sarapuí, Secretaria Municipal de Saúde e profissionais voluntários. Riscos: chuva de janeiro, controle de público e ausência de follow-up — planejar o encaminhamento antes da feira.",
+  "parcerias_en": "Sarapuí Family Clinic (Av. Chopin, 307-A), Vila São Luís health units, UPA 24h Sarapuí, Municipal Health Secretariat and volunteer professionals. Risks: January rain, crowd control, no follow-up — plan referrals before the fair."
+ },
+ {
+  "id": "op-3",
+  "num": 3,
+  "nome_pt": "Escola Cristã de Férias",
+  "nome_en": "Holiday Bible School",
+  "bairro": "Vila São Luiz",
+  "prioridade": 1,
+  "lat": -22.7778,
+  "lon": -43.29244,
+  "publico_pt": "Crianças de 4 a 12 anos e seus responsáveis.",
+  "publico_en": "Children aged 4–12 and their caregivers.",
+  "descricao_pt": "Colônia de férias de 4–5 dias com histórias bíblicas, música, oficinas de arte, jogos, esporte, lanche saudável e um canto da leitura; no encerramento, celebração com as famílias e entrega de certificados.",
+  "descricao_en": "A 4–5 day holiday club with Bible stories, music, art workshops, games, sport, healthy snacks and a reading corner; a closing celebration with families and certificates.",
+  "atividades_pt": [
+   "Programação bíblica diária com música e teatro",
+   "Oficinas de arte, reciclagem e esporte",
+   "Canto da leitura com livros doados",
+   "Encerramento com as famílias e cadastro para o ministério infantil"
+  ],
+  "atividades_en": [
+   "Daily Bible programme with music and drama",
+   "Art, recycling and sport workshops",
+   "Reading corner with donated books",
+   "Family closing event and registration for children's ministry"
+  ],
+  "justificativa_pt": "19,9% da população tem até 14 anos; as férias de janeiro deixam as crianças sem atividade; não há parquinho inclusivo em Itatiaia nem biblioteca pública no território.",
+  "justificativa_en": "19.9% of the population is aged 0–14; the January holidays leave children without structured activity; there is no inclusive playground in Itatiaia and no public library in the territory.",
+  "impacto_pt": "80–150 crianças; 60–120 famílias contatadas; base para o ministério infantil e para grupos pequenos.",
+  "impacto_en": "80–150 children; 60–120 families contacted; a base for children's ministry and small groups.",
+  "parcerias_pt": "Escolas municipais, estudantes de pedagogia da UERJ-FEBF e Conselho Tutelar. Riscos: proteção à criança (regra dos dois adultos, autorização dos responsáveis, proporção 1 adulto:6 crianças), alergias e chuva.",
+  "parcerias_en": "Municipal schools, UERJ-FEBF education students and the Guardianship Council. Risks: child protection (two-adult rule, guardian authorisation, ratio 1 adult:6 children), allergies and rain."
+ },
+ {
+  "id": "op-4",
+  "num": 4,
+  "nome_pt": "Esporte & Cidadania",
+  "nome_en": "Sport & Citizenship",
+  "bairro": "Vila São Luiz",
+  "prioridade": 2,
+  "lat": -22.77683,
+  "lon": -43.29308,
+  "publico_pt": "Jovens de 12 a 24 anos, com times masculinos, femininos e mistos.",
+  "publico_en": "Youth aged 12–24, with boys', girls' and mixed teams.",
+  "descricao_pt": "Torneios de futebol, vôlei e futevôlei nas quadras e campos da Praça da Apoteose, com código de fair play assinado por cada time, pausas de 15 minutos sobre drogas, respeito e primeiro emprego, e mentores recrutados no clube local.",
+  "descricao_en": "Football, volleyball and footvolley tournaments on the Apoteose courts and pitches, with a fair-play code signed by every team, 15-minute time-outs on drugs, respect and first jobs, and mentors recruited from the local club.",
+  "atividades_pt": [
+   "Torneios por faixa de idade e por gênero",
+   "“Time-out” educativo entre as partidas",
+   "Mentores do Grêmio Recreativo Juventus e do comércio local",
+   "Noite de premiação com as famílias e mensagem de esperança"
+  ],
+  "atividades_en": [
+   "Tournaments by age group and gender",
+   "Educational time-outs between matches",
+   "Mentors from the Juventus sports club and local commerce",
+   "Awards night with families and a message of hope"
+  ],
+  "justificativa_pt": "Há 118.343 jovens de 15–24 anos no município; as quadras públicas ficam sem programação nas férias; o roubo de celular dobrou (960 → 1.916, 2022→2025) e o Complexo Esportivo da Apoteose está em obra — há apoio político e visibilidade.",
+  "justificativa_en": "There are 118,343 people aged 15–24 in the municipality; public courts are unprogrammed during the holidays; phone robbery doubled (960 → 1,916, 2022→2025) and the Apoteose sports complex is under construction — political support and visibility.",
+  "impacto_pt": "150–300 jovens; 20–40 mentores comunitários; 40–80 contatos para estudos bíblicos.",
+  "impacto_en": "150–300 young people; 20–40 community mentors; 40–80 Bible-study contacts.",
+  "parcerias_pt": "Grêmio Recreativo Juventus, Secretaria de Esportes, Conselho Tutelar e comércio local. Riscos: rivalidade entre times e jovens ligados ao crime — regras claras, nenhum time representando facção, lideranças locais na formação dos times.",
+  "parcerias_en": "Juventus sports club, Municipal Sports Secretariat, Guardianship Council and local commerce. Risks: rivalry and gang-adjacent youth — clear rules, no team representing a faction, local leaders forming the teams."
+ },
+ {
+  "id": "op-5",
+  "num": 5,
+  "nome_pt": "Reforço escolar e inclusão digital",
+  "nome_en": "Tutoring and digital inclusion",
+  "bairro": "Vila São Luiz / Itatiaia",
+  "prioridade": 3,
+  "lat": -22.77543,
+  "lon": -43.29703,
+  "publico_pt": "Crianças de 8 a 14 anos com defasagem escolar e seus pais.",
+  "publico_en": "Children aged 8–14 with learning gaps and their parents.",
+  "descricao_pt": "Reforço em leitura, matemática e inglês em pequenos grupos; laboratório de inclusão digital para pais (plataformas escolares, CadÚnico, SUS, currículo) e “hora dos pais” sobre acompanhamento escolar.",
+  "descricao_en": "Small-group tutoring in reading, maths and English; a digital-inclusion lab for parents (school platforms, social benefits, SUS, CV) and a “parents' hour” on supporting school life.",
+  "atividades_pt": [
+   "Aulas de reforço em pequenos grupos",
+   "Laboratório de inclusão digital para adultos",
+   "Hora dos pais: como acompanhar a escola",
+   "Campanha do livro e do material escolar"
+  ],
+  "atividades_en": [
+   "Small-group tutoring",
+   "Digital-inclusion lab for adults",
+   "Parents' hour: how to follow school life",
+   "Book and school-supply drive"
+  ],
+  "justificativa_pt": "30,4% dos adultos não concluíram o fundamental e apenas 8,8% têm ensino superior — muitos pais não conseguem ajudar os filhos; a UERJ-FEBF é parceira natural dentro do território.",
+  "justificativa_en": "30.4% of adults did not finish primary school and only 8.8% have tertiary education — many parents cannot help their children; UERJ-FEBF is a natural partner inside the territory.",
+  "impacto_pt": "40–80 crianças; 20–40 pais; 10–20 voluntários formados como tutores.",
+  "impacto_en": "40–80 children; 20–40 parents; 10–20 volunteers trained as tutors.",
+  "parcerias_pt": "UERJ-FEBF, IFRJ e escolas municipais. Riscos: baixa frequência sem lanche ou esporte — combinar com atividade física.",
+  "parcerias_en": "UERJ-FEBF, IFRJ and municipal schools. Risks: low attendance without snacks or sport — combine with physical activity."
+ },
+ {
+  "id": "op-6",
+  "num": 6,
+  "nome_pt": "Café da Esperança para idosos",
+  "nome_en": "“Coffee of Hope” for the elderly",
+  "bairro": "Parque Sarapuí",
+  "prioridade": 3,
+  "lat": -22.7865,
+  "lon": -43.2811,
+  "publico_pt": "Idosos de 60 anos ou mais, especialmente os que moram sozinhos ou têm mobilidade reduzida.",
+  "publico_en": "People aged 60+, especially those living alone or with reduced mobility.",
+  "descricao_pt": "Encontros semanais com café, música, jogos de memória, alongamento e conversa sobre saúde; visitas aos acamados; apoio para ler contas e organizar remédios; celebração de aniversários e registro de histórias de vida.",
+  "descricao_en": "Weekly gatherings with coffee, music, memory games, gentle exercise and health talks; visits to the housebound; help reading bills and organising medication; birthday celebrations and life-story recording.",
+  "atividades_pt": [
+   "Café, música e jogos de memória",
+   "Aferição de pressão com enfermeira voluntária",
+   "Apoio com contas, benefícios e remédios",
+   "Visitas domiciliares aos acamados"
+  ],
+  "atividades_en": [
+   "Coffee, music and memory games",
+   "Blood-pressure checks with a volunteer nurse",
+   "Support with bills, benefits and medication",
+   "Home visits to the housebound"
+  ],
+  "justificativa_pt": "15,9% da população tem 60+ anos e o índice de envelhecimento é 53,4/100; a atenção primária é fina na área; a prefeitura construiu academia para idosos na Praça da Paraopeba, reconhecendo a demanda.",
+  "justificativa_en": "15.9% of the population is 60+ and the ageing index is 53.4/100; primary care is thin in the area; the municipality built an outdoor gym for the elderly at Praça da Paraopeba, recognising the demand.",
+  "impacto_pt": "40–80 idosos por semana; 20+ acamados visitados; grupo diurno permanente.",
+  "impacto_en": "40–80 elderly per week; 20+ housebound visited; a permanent daytime group.",
+  "parcerias_pt": "UBS e agentes comunitários de saúde, IASD Itatiaia (ministério do idoso). Riscos: quedas e emergências médicas — protocolo e contatos de emergência.",
+  "parcerias_en": "Health units and community health agents, Itatiaia Adventist church (elderly ministry). Risks: falls and medical emergencies — protocol and emergency contacts."
+ },
+ {
+  "id": "op-7",
+  "num": 7,
+  "nome_pt": "Apoio às famílias e saúde da mulher",
+  "nome_en": "Family support and women's health",
+  "bairro": "Sarapuí",
+  "prioridade": 1,
+  "lat": -22.74927,
+  "lon": -43.29992,
+  "publico_pt": "Mulheres de 18 a 45 anos, gestantes, mães de crianças pequenas e famílias.",
+  "publico_en": "Women aged 18–45, pregnant women, mothers of young children and families.",
+  "descricao_pt": "Feira de saúde da mulher com orientação pré-natal, planejamento reprodutivo, saúde mental e nutricional; roda “Quebrando o Silêncio” sobre violência doméstica com fluxo sigiloso de encaminhamento; kits de higiene e bebê; espaço de beleza e cuidado com as crianças durante as atividades.",
+  "descricao_en": "Women's health fair with prenatal guidance, family planning, mental and nutritional health; a “Breaking the Silence” session on domestic violence with a confidential referral pathway; hygiene and baby kits; a beauty space and childcare during activities.",
+  "atividades_pt": [
+   "Orientação pré-natal e planejamento reprodutivo",
+   "Roda “Quebrando o Silêncio” e fluxo de encaminhamento",
+   "Kits de higiene e bebê; dia da beleza",
+   "Escuta confidencial com voluntárias treinadas"
+  ],
+  "atividades_en": [
+   "Prenatal guidance and family planning",
+   "“Breaking the Silence” session and referral pathway",
+   "Hygiene and baby kits; beauty day",
+   "Confidential listening with trained female volunteers"
+  ],
+  "justificativa_pt": "Foram 276 estupros no município em 2025; 8,3% dos domicílios têm esgoto inadequado; a nova Clínica da Família Sarapuí (ago/2026) não tem estrutura própria de busca ativa.",
+  "justificativa_en": "276 rapes were reported in the municipality in 2025; 8.3% of households have inadequate sewage; the new Sarapuí Family Clinic (Aug 2026) has no outreach structure of its own.",
+  "impacto_pt": "100–200 mulheres; 30–60 encaminhamentos; grupo mensal de mulheres.",
+  "impacto_en": "100–200 women; 30–60 referrals; a monthly women's group.",
+  "parcerias_pt": "Clínica da Família Sarapuí, CRAS, Conselho Tutelar e DEAM. Riscos: sigilo e obrigação legal de notificação (ECA/Lei 13.431) — protocolo escrito e equipe feminina.",
+  "parcerias_en": "Sarapuí Family Clinic, CRAS, Guardianship Council and the women's police station (DEAM). Risks: confidentiality and legal reporting duties (ECA/Law 13.431) — written protocol and a female team."
+ },
+ {
+  "id": "op-8",
+  "num": 8,
+  "nome_pt": "Rio Vivo: enchentes e cuidado do Sarapuí",
+  "nome_en": "Living River: floods and Sarapuí care",
+  "bairro": "Parque Sarapuí",
+  "prioridade": 2,
+  "lat": -22.78359,
+  "lon": -43.28451,
+  "publico_pt": "Famílias em ruas alagáveis e jovens como educadores ambientais.",
+  "publico_en": "Households on flood-prone streets and youth as environmental educators.",
+  "descricao_pt": "Mutirão de limpeza de margens e canais com a limpeza urbana; distribuição de kits de limpeza e “kit enchente” (documentos em plástico, plano de remédios); porta a porta com orientações antes, durante e depois da chuva; exposição infantil “O rio que queremos”.",
+  "descricao_en": "Clean-up of riverbanks and canals with the municipal waste service; distribution of cleaning kits and a “flood kit” (documents in plastic, medication plan); door-to-door guidance before, during and after rain; a children's “the river we want” exhibition.",
+  "atividades_pt": [
+   "Mutirão de limpeza de canais e margens",
+   "Kits de limpeza e kit enchente",
+   "Porta a porta de preparação para enchentes",
+   "Exposição infantil e sessão escolar sobre o Sarapuí"
+  ],
+  "atividades_en": [
+   "Canal and riverbank clean-up",
+   "Cleaning kits and flood kits",
+   "Door-to-door flood preparedness",
+   "Children's exhibition and school session about the Sarapuí"
+  ],
+  "justificativa_pt": "Enchentes recorrentes na bacia do Sarapuí (fev/2026); Projeto Iguaçu de R$ 160 milhões em obras; o PMSB aponta o 1º Distrito, incluindo Vila São Luiz e Sarapuí, como área de alagamento.",
+  "justificativa_en": "Recurrent flooding in the Sarapuí basin (Feb 2026); the R$ 160 million Projeto Iguaçu is under way; the municipal sanitation plan identifies the 1st District, including Vila São Luiz and Sarapuí, as flood-prone.",
+  "impacto_pt": "100–250 casas orientadas; 2–4 mutirões; 200+ kits.",
+  "impacto_en": "100–250 homes briefed; 2–4 clean-up actions; 200+ kits.",
+  "parcerias_pt": "Defesa Civil, Projeto Iguaçu e associações de moradores. Riscos: chuva e segurança no mutirão (luvas, botas, vacina antitetânica).",
+  "parcerias_en": "Civil Defence, Projeto Iguaçu and residents' associations. Risks: rain and clean-up safety (gloves, boots, tetanus vaccination)."
+ },
+ {
+  "id": "op-9",
+  "num": 9,
+  "nome_pt": "Prevenção e primeiro emprego",
+  "nome_en": "Prevention and first job",
+  "bairro": "Sarapuí",
+  "prioridade": 3,
+  "lat": -22.75113,
+  "lon": -43.29588,
+  "publico_pt": "Jovens de 16 a 24 anos, especialmente fora da escola e do trabalho formal.",
+  "publico_en": "Youth aged 16–24, especially those out of school and formal work.",
+  "descricao_pt": "Oficinas de currículo e entrevista, clínica de MEI e formalização, “Profissões em 20 minutos” com profissionais locais, mentoria de três meses e encaminhamento para cursos do IFRJ e vagas no comércio.",
+  "descricao_en": "CV and interview workshops, a MEI/formalisation clinic, “Professions in 20 minutes” with local professionals, three-month mentoring and referral to IFRJ courses and commerce jobs.",
+  "atividades_pt": [
+   "Oficina de currículo e entrevista",
+   "Clínica de MEI e formalização",
+   "“Profissões em 20 minutos”",
+   "Mentoria de 3 meses e encaminhamentos"
+  ],
+  "atividades_en": [
+   "CV and interview workshop",
+   "MEI and formalisation clinic",
+   "“Professions in 20 minutes”",
+   "Three-month mentoring and referrals"
+  ],
+  "justificativa_pt": "41,8% de informalidade e mediana de R$ 1.500; jovens com ensino médio e sem ponte para o emprego formal.",
+  "justificativa_en": "41.8% informality and a median income of R$ 1,500; young people with secondary education but no bridge into formal employment.",
+  "impacto_pt": "60–120 jovens; 20–40 duplas de mentoria; 10–20 encaminhamentos.",
+  "impacto_en": "60–120 young people; 20–40 mentoring pairs; 10–20 referrals.",
+  "parcerias_pt": "IFRJ, CRAS, Sebrae e comércio local. Riscos: criar expectativa sem vagas — prometer formação e encaminhamento, nunca emprego.",
+  "parcerias_en": "IFRJ, CRAS, Sebrae and local commerce. Risks: raising expectations without jobs — promise training and referrals, never jobs."
+ },
+ {
+  "id": "op-10",
+  "num": 10,
+  "nome_pt": "Calebe Solidário: sangue e alimentos",
+  "nome_en": "Calebe Solidarity: blood and food",
+  "bairro": "Itatiaia",
+  "prioridade": 2,
+  "lat": -22.78161,
+  "lon": -43.3006,
+  "publico_pt": "Pacientes que precisam de sangue e famílias em vulnerabilidade alimentar.",
+  "publico_en": "Patients needing blood and families facing food insecurity.",
+  "descricao_pt": "Campanha de doação de sangue com o Hemorio ou banco de sangue local; montagem e entrega de cestas básicas e kits de higiene para famílias já cadastradas no Mutirão de Natal, com visita e oração em cada entrega.",
+  "descricao_en": "Blood donation drive with Hemorio or the local blood bank; assembly and delivery of food baskets and hygiene kits to families already registered in the Christmas campaign, with a visit and prayer at each delivery.",
+  "atividades_pt": [
+   "Campanha de doação de sangue",
+   "Cestas básicas e kits de higiene",
+   "Varal solidário e material escolar",
+   "Visita e oração em cada entrega"
+  ],
+  "atividades_en": [
+   "Blood donation drive",
+   "Food baskets and hygiene kits",
+   "Clothes rail and school supplies",
+   "A visit and prayer at every delivery"
+  ],
+  "justificativa_pt": "75,6% dos ocupados ganham até 2 salários mínimos; a insegurança alimentar é real e o Mutirão de Natal já produz uma lista de famílias cadastradas que o Calebe pode visitar em janeiro.",
+  "justificativa_en": "75.6% of workers earn up to 2 minimum wages; food insecurity is real and the Christmas campaign already produces a registered family list that Calebe can visit in January.",
+  "impacto_pt": "100–300 doadores; 100–200 cestas entregues com visita; 30–60 contatos.",
+  "impacto_en": "100–300 donors; 100–200 baskets delivered with a visit; 30–60 contacts.",
+  "parcerias_pt": "Hemorio, supermercados, farmácias e IASD Itatiaia. Riscos: logística do banco de sangue, armazenamento de alimentos, dignidade na entrega (sem fotos sem consentimento) e LGPD.",
+  "parcerias_en": "Hemorio, supermarkets, pharmacies and the Itatiaia Adventist church. Risks: blood-bank logistics, food storage, dignity in delivery (no photos without consent) and LGPD compliance."
+ }
+]
